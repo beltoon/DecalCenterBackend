@@ -22,15 +22,15 @@ public class CarService {
 
     public List<CarDto> getAllCars() {
         List<Car> carList = carRepository.findAll();
-        return transferCaListToDtoList(carList);
+        return transferCarListToDtoList(carList);
     }
 
     public List<CarDto> getAllCarsByCarName(String carName) {
         List<Car> carList = carRepository.findAllCarsByCarNameEqualsIgnoreCase(carName);
-        return transferCaListToDtoList(carList);
+        return transferCarListToDtoList(carList);
     }
 
-    public List<CarDto> transferCaListToDtoList(List<Car> cars) {
+    public List<CarDto> transferCarListToDtoList(List<Car> cars) {
         List<CarDto> carDtoList = new ArrayList<>();
 
         for (Car c : cars) {

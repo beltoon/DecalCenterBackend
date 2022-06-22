@@ -1,5 +1,7 @@
 package com.tobias.decalcenter.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,7 @@ public class Car {
     @Id
     @GeneratedValue
     Long id;
+
     private String carName;
 
     public Car() {}

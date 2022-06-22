@@ -2,8 +2,10 @@ package com.tobias.decalcenter.controllers;
 
 import com.tobias.decalcenter.dtos.CarDto;
 import com.tobias.decalcenter.dtos.CarInputDto;
+import com.tobias.decalcenter.models.Car;
 import com.tobias.decalcenter.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,12 +46,13 @@ public class CarController {
         return ResponseEntity.ok().body(car);
     }
 
-    @PostMapping(value = "/cars")
+    @PostMapping("/cars")
+//@RequestMapping(value = "/cars", method = RequestMethod.POST)
     public ResponseEntity<Object> addCar(@RequestBody CarInputDto carInputDto) {
 
         CarDto dto = carService.addCar(carInputDto);
 
-        return ResponseEntity.created(null).body(dto);
+        return ResponseEntity.created().body(dto);
     }
 
     @DeleteMapping("/cars/{id}")
@@ -61,6 +64,7 @@ public class CarController {
     }
 
     @PutMapping("/cars/{id}")
+//    @RequestMapping(value = "/cars/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateCar(@PathVariable Long id, @RequestBody CarInputDto newCar) {
 
         CarDto dto = carService.updateCar(id, newCar);
