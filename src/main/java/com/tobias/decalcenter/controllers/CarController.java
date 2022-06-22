@@ -4,11 +4,8 @@ import com.tobias.decalcenter.dtos.CarDto;
 import com.tobias.decalcenter.dtos.CarInputDto;
 import com.tobias.decalcenter.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -24,17 +21,17 @@ public class CarController {
     }
 
     @GetMapping("/cars")
-    public ResponseEntity<List<CarDto>> getAllCars(@RequestParam(value = "name", required = false) Optional<String> name) {
+    public ResponseEntity<List<CarDto>> getAllCars(@RequestParam(value = "carName", required = false) Optional<String> carName) {
 
         List<CarDto> dtos;
 
-        if (name.isEmpty()){
+        if (carName.isEmpty()){
 
             dtos = carService.getAllCars();
 
         } else {
 
-            dtos = carService.getAllCarsByName(name.get());
+            dtos = carService.getAllCarsByCarName(carName.get());
 
         }
 
@@ -49,13 +46,17 @@ public class CarController {
 
     @PostMapping(value = "/cars")
     public ResponseEntity<Object> addCar(@RequestBody CarInputDto carInputDto) {
+
         CarDto dto = carService.addCar(carInputDto);
+
         return ResponseEntity.created(null).body(dto);
     }
 
     @DeleteMapping("/cars/{id}")
     public ResponseEntity<Object> deleteCar(@PathVariable Long id) {
+
         carService.deleteCar(id);
+
         return ResponseEntity.noContent().build();
     }
 

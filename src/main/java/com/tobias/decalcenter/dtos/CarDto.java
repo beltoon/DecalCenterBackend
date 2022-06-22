@@ -2,13 +2,13 @@ package com.tobias.decalcenter.dtos;
 
 public class CarDto {
     private Long id;
-    private String name;
+    private String carName;
 
 public CarDto() {}
 
-    public CarDto(Long id, String name) {
+    public CarDto(Long id, String carName) {
         this.id = id;
-        this.name = name;
+        this.carName = carName;
     }
 
     public Long getId() {
@@ -20,11 +20,11 @@ public CarDto() {}
     }
 
     public String getCarName() {
-        return name;
+        return carName;
     }
 
-    public void setName(String carName) {
-        this.name = carName;
+    public void setCarName(String carName) {
+        this.carName = carName;
     }
 
 }

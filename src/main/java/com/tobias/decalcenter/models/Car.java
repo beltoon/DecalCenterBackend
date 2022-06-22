@@ -3,35 +3,35 @@ package com.tobias.decalcenter.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "cars")
 public class Car {
 
     @Id
     @GeneratedValue
     Long id;
-    private String name;
+    private String carName;
 
     public Car() {}
 
     public Car(Long id,
-               String name) {
+               String carName) {
         this.id = id;
-        this.name = name;
-
+        this.carName = carName;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getCarName() {
+        return carName;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCarName(String name) {
+        this.carName = name;
     }
 }

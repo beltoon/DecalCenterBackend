@@ -2,18 +2,17 @@ package com.tobias.decalcenter.dtos;
 
 public class CarInputDto {
 
-    private String name;
+    private String carName;
 
-    public CarInputDto(String name) {
-        this.name = name;
-
+    public CarInputDto(String carName) {
+        this.carName = carName;
     }
 
-    public String getName() {
-        return name;
+    public String getCarName() {
+        return carName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCarName(String carName) {
+        this.carName = carName;
     }
 }

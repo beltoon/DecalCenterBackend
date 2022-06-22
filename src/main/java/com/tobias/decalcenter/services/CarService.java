@@ -25,8 +25,8 @@ public class CarService {
         return transferCaListToDtoList(carList);
     }
 
-    public List<CarDto> getAllCarsByName(String name) {
-        List<Car> carList = carRepository.findAllCarsByNameEqualsIgnoreCase(name);
+    public List<CarDto> getAllCarsByCarName(String carName) {
+        List<Car> carList = carRepository.findAllCarsByCarNameEqualsIgnoreCase(carName);
         return transferCaListToDtoList(carList);
     }
 
@@ -52,6 +52,7 @@ public class CarService {
 
     public CarDto addCar(CarInputDto dto) {
         Car car = transferToCar(dto);
+
         carRepository.save(car);
 
         return transferToDto(car);
@@ -79,7 +80,7 @@ public class CarService {
     public Car transferToCar(CarInputDto dto) {
         var car = new Car();
 
-        car.setName(dto.getName());
+        car.setCarName(dto.getCarName());
 
         return car;
     }
@@ -87,7 +88,7 @@ public class CarService {
     public CarDto transferToDto(Car car) {
         CarDto dto = new CarDto();
         dto.setId(car.getId());
-        dto.setName(car.getName());
+        dto.setCarName(car.getCarName());
 
         return dto;
     }
