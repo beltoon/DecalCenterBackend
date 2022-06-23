@@ -79,8 +79,9 @@ public class DecalService {
         var decal = new Decal();
 
         decal.setName(decalDto.getName());
-        decal.setOwner(decalDto.getOwner());
         decal.setCar(decalDto.getCar());
+        decal.setOwner(decalDto.getOwner());
+        decal.setBrand(decalDto.getBrand());
         decal.setEvent(decalDto.getEvent());
         return decal;
     }
@@ -89,8 +90,9 @@ public class DecalService {
         DecalDto decalDto = new DecalDto();
         decalDto.setId(decal.getId());
         decalDto.setName(decal.getName());
-        decalDto.setOwner(decal.getOwner());
         decalDto.setCar(decal.getCar());
+        decalDto.setOwner(decal.getOwner());
+        decalDto.setBrand(decal.getBrand());
         decalDto.setEvent(decal.getEvent());
         return decalDto;
     }

@@ -8,9 +8,9 @@ INSERT INTO cars (id, name, brand, type, category) VALUES (7, 'Lamborghini Hurac
 INSERT INTO cars (id, name, brand, type, category) VALUES (8, 'Mercedes-AMG GT3 2020', 'Mercedes', 'road', 'gt3');
 INSERT INTO cars (id, name, brand, type, category) VALUES (9, 'NASCAR XFINITY Chevrolet Camaro', 'Chevrolet', 'oval', 'xfinity');
 
-INSERT INTO decals (id, name, car, owner, event) Values (1, 'TREQ M4 branding', 'BMW M4 GT3', 'TREQ Sim-racing Equipment', 'IMSA');
-INSERT INTO decals (id, name, car, owner, event) Values (2, 'Heusinkveld Audi R8 branding', 'Audi R8 LMS', 'Heusinkveld Engineering', 'VRS');
-INSERT INTO decals (id, name, car, owner, event) Values (3, 'IRNL Ferrari Fixed', 'Ferrari 488 GT3 Evo 2020', 'iRacing Nederland', 'private series');
+INSERT INTO decals (id, name, car, owner, brand, event) VALUES (1, 'TREQ M4 branding', 'BMW M4 GT3', 'TREQ Simracing Equipment', 'TREQ', 'IMSA');
+INSERT INTO decals (id, name, car, owner, brand, event) VALUES (2, 'Heusinkveld Audi R8 branding', 'Audi R8 LMS', 'Heusinkveld Engineering', 'Heusinkveld Engineering', 'VRS');
+INSERT INTO decals (id, name, car, owner, brand, event) VALUES (3, 'IRNL Ferrari Fixed', 'Ferrari 488 GT3 Evo 2020', 'iRacing Nederland', 'Joepie', 'private series');
 
 
 INSERT INTO users (username, password, email, enabled) VALUES ('user', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica','user@test.nl', TRUE);
