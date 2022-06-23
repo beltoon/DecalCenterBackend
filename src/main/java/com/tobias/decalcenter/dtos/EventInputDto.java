@@ -1,14 +1,21 @@
 package com.tobias.decalcenter.dtos;
 
+import java.time.LocalDate;
+
 public class EventInputDto {
     private String name;
     private String availableCars;
     private Boolean privateEvent;
+    private LocalDate eventDate;
 
-    public EventInputDto(String name, String date, Boolean activeAfterDate, String availableCars, Boolean privateEvent) {
+    public EventInputDto(String name,
+                         String availableCars,
+                         Boolean privateEvent,
+                         LocalDate eventDate) {
         this.name = name;
         this.availableCars = availableCars;
         this.privateEvent = privateEvent;
+        this.eventDate = eventDate;
     }
 
     public String getName() {
@@ -23,6 +30,10 @@ public class EventInputDto {
         return privateEvent;
     }
 
+    public LocalDate getEventDate() {
+        return eventDate;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -33,5 +44,9 @@ public class EventInputDto {
 
     public void setPrivateEvent(Boolean privateEvent) {
         this.privateEvent = privateEvent;
+    }
+
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
     }
 }

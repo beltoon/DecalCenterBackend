@@ -7,7 +7,10 @@ public class CarInputDto {
     private String type;
     private String category;
 
-    public CarInputDto(String name, String brand, String type, String category) {
+    public CarInputDto(String name,
+                       String brand,
+                       String type,
+                       String category) {
         this.name = name;
         this.brand = brand;
         this.type = type;

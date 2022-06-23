@@ -7,7 +7,11 @@ public class DecalInputDto {
     private String brand;
     private String event;
 
-    public DecalInputDto(String name, String car, String owner, String brand, String event) {
+    public DecalInputDto(String name,
+                         String car,
+                         String owner,
+                         String brand,
+                         String event) {
         this.name = name;
         this.car = car;
         this.owner = owner;

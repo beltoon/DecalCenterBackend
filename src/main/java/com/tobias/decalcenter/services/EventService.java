@@ -82,6 +82,7 @@ public class EventService {
         event.setName(eventDto.getName());
         event.setAvailableCars(eventDto.getAvailableCars());
         event.setPrivateEvent(eventDto.getPrivateEvent());
+        event.setEventDate(eventDto.getEventDate());
 
      return event;
     }
@@ -92,6 +93,7 @@ public class EventService {
         eventDto.setName(event.getName());
         eventDto.setAvailableCars(event.getAvailableCars());
         eventDto.setPrivateEvent(event.getPrivateEvent());
+        eventDto.setEventDate(event.getEventDate());
         return eventDto;
     }
 }

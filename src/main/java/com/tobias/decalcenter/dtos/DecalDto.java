@@ -11,7 +11,12 @@ public class DecalDto {
     public DecalDto() {
     }
 
-    public DecalDto(Long id, String name, String car, String owner, String brand, String event) {
+    public DecalDto(Long id,
+                    String name,
+                    String car,
+                    String owner,
+                    String brand,
+                    String event) {
         this.id = id;
         this.name = name;
         this.car = car;
