@@ -33,25 +33,25 @@ public class CarService {
     public List<CarDto> transferCarListToDtoList(List<Car> cars) {
         List<CarDto> carDtoList = new ArrayList<>();
 
-        for (Car c : cars) {
-            CarDto dto = transferToDto(c);
-            carDtoList.add(dto);
+        for (Car car : cars) {
+            CarDto carDto = transferToDto(car);
+            carDtoList.add(carDto);
         }
         return carDtoList;
     }
 
     public CarDto getCarById(Long id) {
         if (carRepository.findById(id).isPresent()) {
-            Car c = carRepository.findById(id).get();
+            Car car = carRepository.findById(id).get();
 //            CarDto dto = transferToDto(c);
-            return transferToDto(c);
+            return transferToDto(car);
         } else {
-            throw new RecordNotFoundException("no car found");
+            throw new RecordNotFoundException("No car found...");
         }
     }
 
-    public CarDto addCar(CarInputDto dto) {
-        Car car = transferToCar(dto);
+    public CarDto addCar(CarInputDto carInputDto) {
+        Car car = transferToCar(carInputDto);
 
         carRepository.save(car);
 
@@ -62,38 +62,38 @@ public class CarService {
         carRepository.deleteById(id);
     }
 
-    public CarDto updateCar(Long id, CarInputDto inputDto) {
+    public CarDto updateCar(Long id, CarInputDto carInputDto) {
         if (carRepository.findById(id).isPresent()) {
             Car car = carRepository.findById(id).get();
 
-            Car car1 = transferToCar(inputDto);
+            Car car1 = transferToCar(carInputDto);
             car1.setId(car.getId());
 
             carRepository.save(car1);
 
             return transferToDto(car1);
         } else {
-            throw new RecordNotFoundException("no car found");
+            throw new RecordNotFoundException("No car found...");
         }
     }
 
-    public Car transferToCar(CarInputDto dto) {
+    public Car transferToCar(CarInputDto carDto) {
         var car = new Car();
 
-        car.setName(dto.getName());
-        car.setBrand(dto.getBrand());
-        car.setType(dto.getType());
-        car.setCategory(dto.getCategory());
+        car.setName(carDto.getName());
+        car.setBrand(carDto.getBrand());
+        car.setType(carDto.getType());
+        car.setCategory(carDto.getCategory());
         return car;
     }
 
     public CarDto transferToDto(Car car) {
-        CarDto dto = new CarDto();
-        dto.setId(car.getId());
-        dto.setName(car.getName());
-        dto.setBrand(car.getBrand());
-        dto.setType(car.getType());
-        dto.setCategory(car.getCategory());
-        return dto;
+        CarDto carDto = new CarDto();
+        carDto.setId(car.getId());
+        carDto.setName(car.getName());
+        carDto.setBrand(car.getBrand());
+        carDto.setType(car.getType());
+        carDto.setCategory(car.getCategory());
+        return carDto;
     }
 }

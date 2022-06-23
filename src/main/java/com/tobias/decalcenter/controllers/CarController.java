@@ -23,19 +23,19 @@ public class CarController {
     @GetMapping("/cars")
     public ResponseEntity<List<CarDto>> getAllCars(@RequestParam(value = "name", required = false) Optional<String> name) {
 
-        List<CarDto> dtos;
+        List<CarDto> carDtos;
 
         if (name.isEmpty()){
 
-            dtos = carService.getAllCars();
+            carDtos = carService.getAllCars();
 
         } else {
 
-            dtos = carService.getAllCarsByName(name.get());
+            carDtos = carService.getAllCarsByName(name.get());
 
         }
 
-        return ResponseEntity.ok().body(dtos);
+        return ResponseEntity.ok().body(carDtos);
     }
 
     @GetMapping("/cars/{id}")
@@ -47,9 +47,9 @@ public class CarController {
     @PostMapping("/cars")
     public ResponseEntity<Object> addCar(@RequestBody CarInputDto carInputDto) {
 
-        CarDto dto = carService.addCar(carInputDto);
+        CarDto carDto = carService.addCar(carInputDto);
 
-        return ResponseEntity.created(null).body(dto);
+        return ResponseEntity.created(null).body(carDto);
     }
 
     @DeleteMapping("/cars/{id}")
@@ -63,8 +63,8 @@ public class CarController {
     @PutMapping("/cars/{id}")
     public ResponseEntity<Object> updateCar(@PathVariable Long id, @RequestBody CarInputDto newCar) {
 
-        CarDto dto = carService.updateCar(id, newCar);
+        CarDto carDto = carService.updateCar(id, newCar);
 
-        return ResponseEntity.ok().body(dto);
+        return ResponseEntity.ok().body(carDto);
     }
 }
