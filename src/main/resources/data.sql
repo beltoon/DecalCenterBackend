@@ -7,6 +7,8 @@ INSERT INTO cars (id, name, brand, type, category) VALUES (6, 'Porsche 911 GT3 R
 INSERT INTO cars (id, name, brand, type, category) VALUES (7, 'Lamborghini Huracan GT3 EVO', 'Lamborghini', 'road', 'gt3');
 INSERT INTO cars (id, name, brand, type, category) VALUES (8, 'Mercedes-AMG GT3 2020', 'Mercedes', 'road', 'gt3');
 INSERT INTO cars (id, name, brand, type, category) VALUES (9, 'NASCAR XFINITY Chevrolet Camaro', 'Chevrolet', 'oval', 'xfinity');
+INSERT INTO cars (id, name, brand, type, category) VALUES (10, 'Dallara P217', 'Dallara', 'road', 'lmp2');
+
 
 INSERT INTO decals (id, name, car, owner, brand, event) VALUES (1, 'TREQ M4 branding', 'BMW M4 GT3', 'TREQ Simracing Equipment', 'TREQ', 'IMSA');
 INSERT INTO decals (id, name, car, owner, brand, event) VALUES (2, 'Heusinkveld Audi R8 branding', 'Audi R8 LMS', 'Heusinkveld Engineering', 'Heusinkveld Engineering', 'VRS');
