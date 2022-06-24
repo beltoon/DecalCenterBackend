@@ -10,9 +10,9 @@ INSERT INTO cars (id, name, brand, type, category) VALUES (9, 'NASCAR XFINITY Ch
 INSERT INTO cars (id, name, brand, type, category) VALUES (10, 'Dallara P217', 'Dallara', 'road', 'lmp2');
 
 
-INSERT INTO decals (id, name, car, owner, brand, event) VALUES (1, 'TREQ M4 branding', 'BMW M4 GT3', 'TREQ Simracing Equipment', 'TREQ', 'IMSA');
-INSERT INTO decals (id, name, car, owner, brand, event) VALUES (2, 'Heusinkveld Audi R8 branding', 'Audi R8 LMS', 'Heusinkveld Engineering', 'Heusinkveld Engineering', 'VRS');
-INSERT INTO decals (id, name, car, owner, brand, event) VALUES (3, 'IRNL Ferrari Fixed', 'Ferrari 488 GT3 Evo 2020', 'iRacing Nederland', 'Joepie', 'private series');
+INSERT INTO decals (id, name, car, creator, company, series) VALUES (1, 'TREQ M4 branding', 'BMW M4 GT3', 'TREQ Simracing Equipment', 'TREQ', 'IMSA');
+INSERT INTO decals (id, name, car, creator, company, series) VALUES (2, 'Heusinkveld Audi R8 branding', 'Audi R8 LMS', 'Heusinkveld Engineering', 'Heusinkveld Engineering', 'VRS');
+INSERT INTO decals (id, name, car, creator, company, series) VALUES (3, 'IRNL Ferrari Fixed', 'Ferrari 488 GT3 Evo 2020', 'iRacing Nederland', 'Joepie', 'private series');
 
 INSERT INTO events (id, name, available_cars, private_event, event_date) VALUES (1, 'Daytona 24hr', 'Mercedes-AMG GT3 2020', false, '25-12-2022');
 

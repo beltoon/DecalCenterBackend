@@ -3,20 +3,20 @@ package com.tobias.decalcenter.dtos;
 public class DecalInputDto {
     private String name;
     private String car;
-    private String owner;
-    private String brand;
-    private String event;
+    private String creator;
+    private String company;
+    private String series;
 
     public DecalInputDto(String name,
                          String car,
-                         String owner,
-                         String brand,
-                         String event) {
+                         String creator,
+                         String company,
+                         String series) {
         this.name = name;
         this.car = car;
-        this.owner = owner;
-        this.brand = brand;
-        this.event = event;
+        this.creator = creator;
+        this.company = company;
+        this.series = series;
     }
 
     public String getName() {
@@ -27,16 +27,16 @@ public class DecalInputDto {
         return car;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getCreator() {
+        return creator;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getCompany() {
+        return company;
     }
 
-    public String getEvent() {
-        return event;
+    public String getSeries() {
+        return series;
     }
 
     public void setName(String name) {
@@ -47,15 +47,15 @@ public class DecalInputDto {
         this.car = car;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
+    public void setSeries(String series) {
+        this.series = series;
     }
 }

@@ -3,14 +3,22 @@ package com.tobias.decalcenter.dtos;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.tobias.decalcenter.models.Authority;
 
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class UserDto {
 
+    @Size(min=5, max=48, message = "username must be between 2 and 48")
     public String username;
+
     public String password;
     public Boolean enabled;
     public String apikey;
+    @NotEmpty
+    @Email(message = "invalid email adress")
     public String email;
     @JsonSerialize
     public Set<Authority> authorities;

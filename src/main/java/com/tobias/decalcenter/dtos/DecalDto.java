@@ -4,9 +4,9 @@ public class DecalDto {
     private Long id;
     private String name;
     private String car;
-    private String owner;
-    private String brand;
-    private String event;
+    private String creator;
+    private String company;
+    private String series;
 
     public DecalDto() {
     }
@@ -14,15 +14,15 @@ public class DecalDto {
     public DecalDto(Long id,
                     String name,
                     String car,
-                    String owner,
-                    String brand,
-                    String event) {
+                    String creator,
+                    String company,
+                    String series) {
         this.id = id;
         this.name = name;
         this.car = car;
-        this.owner = owner;
-        this.brand = brand;
-        this.event = event;
+        this.creator = creator;
+        this.company = company;
+        this.series = series;
     }
 
     public Long getId() {
@@ -37,16 +37,16 @@ public class DecalDto {
         return car;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getCreator() {
+        return creator;
     }
 
-    public String getBrand() {
-        return brand;
+    public String getCompany() {
+        return company;
     }
 
-    public String getEvent() {
-        return event;
+    public String getSeries() {
+        return series;
     }
 
     public void setId(Long id) {
@@ -61,15 +61,15 @@ public class DecalDto {
         this.car = car;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
+    public void setSeries(String series) {
+        this.series = series;
     }
 }

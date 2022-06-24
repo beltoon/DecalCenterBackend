@@ -4,10 +4,14 @@ import com.tobias.decalcenter.dtos.UserDto;
 import com.tobias.decalcenter.exceptions.BadRequestException;
 import com.tobias.decalcenter.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -39,20 +43,29 @@ public class UserController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<UserDto> createClient(@RequestBody UserDto dto) {
-        ;
+    public ResponseEntity<Object> createUser(@Valid @RequestBody UserDto userDto, BindingResult br) {
+        if (br.hasErrors()) {
+            StringBuilder sb = new StringBuilder();
+            for (FieldError fe : br.getFieldErrors()) {
+                sb.append(fe.getDefaultMessage());
+                sb.append("\n");
+            }
+            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+        }
+        else {
 
-        String newUsername = userService.createUser(dto);
-        userService.addAuthority(newUsername, "ROLE_USER");
+            String newUsername = userService.createUser(userDto);
+            userService.addAuthority(newUsername, "ROLE_USER");
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
-                .buildAndExpand(newUsername).toUri();
+            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/user/{username}")
+                    .buildAndExpand(newUsername).toUri();
 
-        return ResponseEntity.created(location).build();
+            return ResponseEntity.created(location).build();
+        }
     }
 
     @PutMapping(value = "/{username}")
-    public ResponseEntity<UserDto> updateClient(@PathVariable("username") String username, @RequestBody UserDto dto) {
+    public ResponseEntity<UserDto> updateUser(@PathVariable("username") String username, @RequestBody UserDto dto) {
 
         userService.updateUser(username, dto);
 
