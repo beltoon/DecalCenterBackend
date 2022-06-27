@@ -14,7 +14,8 @@ INSERT INTO decals (id, name, creator, company, series) VALUES (1001, 'TREQ M4 b
 INSERT INTO decals (id, name, creator, company, series) VALUES (1002, 'Heusinkveld Audi R8 branding', 'Heusinkveld Engineering', 'Heusinkveld Engineering', 'VRS');
 INSERT INTO decals (id, name, creator, company, series) VALUES (1003, 'iOverlay branding', 'Joepie', 'iOverlay inc.', 'World Series');
 
-INSERT INTO events (id, name, available_decals, private_event, event_date) VALUES (1001, 'Daytona 24hr', 'TREQ M4 branding', false, '25-12-2022');
+INSERT INTO events (id, name, private_event, event_date) VALUES (1001, 'Daytona 24hr', false, '25-12-2022');
+INSERT INTO events (id, name, private_event, event_date) VALUES (1002, 'Watkins 6hr', false, '24-12-2022');
 
 INSERT INTO users (username, password, email, enabled) VALUES ('user', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica','user@test.nl', TRUE);
 INSERT INTO users (username, password, email, enabled) VALUES ('admin', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE);

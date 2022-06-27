@@ -1,15 +1,19 @@
 package com.tobias.decalcenter.dtos;
 
+import com.tobias.decalcenter.models.Decal;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Set;
 
 public class EventInputDto {
     private String name;
-    private String availableDecals;
+    private Set<Decal> availableDecals;
     private Boolean privateEvent;
     private LocalDate eventDate;
 
     public EventInputDto(String name,
-                         String availableDecals,
+                         Set<Decal> availableDecals,
                          Boolean privateEvent,
                          LocalDate eventDate) {
         this.name = name;
@@ -22,7 +26,7 @@ public class EventInputDto {
         return name;
     }
 
-    public String getAvailableDecals() {
+    public Set<Decal> getAvailableDecals() {
         return availableDecals;
     }
 
@@ -38,7 +42,7 @@ public class EventInputDto {
         this.name = name;
     }
 
-    public void setAvailableDecals(String availableDecals) {
+    public void setAvailableDecals(Set availableDecals) {
         this.availableDecals = availableDecals;
     }
 

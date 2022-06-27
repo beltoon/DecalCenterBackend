@@ -16,7 +16,11 @@ public class EventService {
 
     private final EventRepository eventRepository;
 
-    public EventService(EventRepository eventRepository) {this.eventRepository = eventRepository;}
+    private final DecalService decalService;
+
+    public EventService(EventRepository eventRepository, DecalService decalService) {this.eventRepository = eventRepository;
+        this.decalService = decalService;
+    }
 
     public List<EventDto> getAllEvents() {
         List<Event> eventList = eventRepository.findAll();
@@ -96,4 +100,7 @@ public class EventService {
         eventDto.setEventDate(event.getEventDate());
         return eventDto;
     }
+
+
+
 }

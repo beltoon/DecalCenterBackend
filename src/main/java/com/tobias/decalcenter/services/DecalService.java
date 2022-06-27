@@ -6,6 +6,7 @@ import com.tobias.decalcenter.exceptions.RecordNotFoundException;
 import com.tobias.decalcenter.models.Decal;
 import com.tobias.decalcenter.repositories.CarRepository;
 import com.tobias.decalcenter.repositories.DecalRepository;
+import com.tobias.decalcenter.repositories.EventRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -19,9 +20,12 @@ public class DecalService {
 
     private final CarRepository carRepository;
 
-    public DecalService(DecalRepository decalRepository, CarRepository carRepository) {
+    private final EventRepository eventRepository;
+
+    public DecalService(DecalRepository decalRepository, CarRepository carRepository, EventRepository eventRepository) {
         this.decalRepository = decalRepository;
         this.carRepository = carRepository;
+        this.eventRepository = eventRepository;
     }
 
     public List<DecalDto> getAllDecals() {
@@ -103,8 +107,8 @@ public class DecalService {
         return decalDto;
     }
 
-    public void assignCarToDecal(Long id, Long carId) {
-        var optionalDecal = decalRepository.findById(id);
+    public void assignCarToDecal(Long decalId, Long carId) {
+        var optionalDecal = decalRepository.findById(decalId);
         var optionalCar = carRepository.findById(carId);
 
         if (optionalDecal.isPresent() && optionalCar.isPresent()) {
@@ -113,6 +117,22 @@ public class DecalService {
 
             decal.setCar(car);
             decalRepository.save(decal);
+        } else {
+            throw new RecordNotFoundException();
+        }
+    }
+
+    public void assignDecalToEvent(Long decalId, Long eventId) {
+        var optionalDecal = decalRepository.findById(decalId);
+        var optionalEvent = eventRepository.findById(eventId);
+
+        if (optionalDecal.isPresent() && optionalEvent.isPresent()) {
+            var decal = optionalDecal.get();
+            var event = optionalEvent.get();
+
+            decal.setEvent(event);
+            decalRepository.save(decal);
+
         } else {
             throw new RecordNotFoundException();
         }

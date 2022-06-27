@@ -1,7 +1,12 @@
 package com.tobias.decalcenter.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "events")
@@ -11,23 +16,39 @@ public class Event {
     @GeneratedValue
     Long id;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "car")
+    private Set<Decal> availableDecals = new HashSet<>();
+
     private String name;
-    private String availableDecals;
     private Boolean privateEvent;
     private LocalDate eventDate;
 
     public Event() {}
 
-    public Event(Long id,
-                 String name,
-                 String availableDecals,
-                 Boolean privateEvent,
-                 LocalDate eventDate) {
+    public Event(Long id, Set<Decal> availableDecals, String name, Boolean privateEvent, LocalDate eventDate) {
         this.id = id;
-        this.name = name;
         this.availableDecals = availableDecals;
+        this.name = name;
         this.privateEvent = privateEvent;
         this.eventDate = eventDate;
+    }
+
+    //    public Event(Long id,
+//                 String name,
+//                 String availableDecals,
+//                 Boolean privateEvent,
+//                 LocalDate eventDate) {
+//        this.id = id;
+//        this.name = name;
+//        this.availableDecals = availableDecals;
+//        this.privateEvent = privateEvent;
+//        this.eventDate = eventDate;
+//    }
+
+
+    public Set<Decal> getAvailableDecals() {
+        return availableDecals;
     }
 
     public Long getId() {
@@ -38,16 +59,16 @@ public class Event {
         return name;
     }
 
-    public String getAvailableDecals() {
-        return availableDecals;
-    }
-
     public Boolean getPrivateEvent() {
         return privateEvent;
     }
 
     public LocalDate getEventDate() {
         return eventDate;
+    }
+
+    public void setAvailableDecals(Set<Decal> decals) {
+        this.availableDecals = decals;
     }
 
     public void setId(Long id) {
@@ -58,10 +79,6 @@ public class Event {
         this.name = name;
     }
 
-    public void setAvailableDecals(String availableCars) {
-        this.availableDecals = availableCars;
-    }
-
     public void setPrivateEvent(Boolean privateEvent) {
         this.privateEvent = privateEvent;
     }
@@ -69,4 +86,5 @@ public class Event {
     public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
     }
+
 }

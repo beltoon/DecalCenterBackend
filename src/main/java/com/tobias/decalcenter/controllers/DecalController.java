@@ -70,11 +70,26 @@ public class DecalController {
     }
 
     @PutMapping("decals/{id}/cars/{carId}")
-    public void assignCartoDecal(
+    public void assignCarToDecal(
             @PathVariable("id") Long id,
             @PathVariable("carId") Long carId) {
         decalService.assignCarToDecal(id, carId);
     }
+
+//    @PutMapping("decals/{id}/events/{eventId}")
+//    public void assignEventToDecal(
+//            @PathVariable("id") Long id,
+//            @PathVariable("eventId") Long eventId) {
+//        decalService.assignEventToDecal(id, eventId);
+//    }
+
+    @PutMapping("decals/{id}/events/{eventId}")
+    public void assignDecalToEvent(
+            @PathVariable("id") Long id,
+            @PathVariable("eventId") Long eventId) {
+        decalService.assignDecalToEvent(id, eventId);
+    }
+
 
 
 //    @PutMapping("/{decalId}/cars/{carId}")
