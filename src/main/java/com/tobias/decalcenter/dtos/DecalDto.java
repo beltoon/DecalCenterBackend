@@ -1,9 +1,11 @@
 package com.tobias.decalcenter.dtos;
 
+import com.tobias.decalcenter.models.Car;
+
 public class DecalDto {
     private Long id;
     private String name;
-    private String car;
+    private Car car;
     private String creator;
     private String company;
     private String series;
@@ -13,7 +15,7 @@ public class DecalDto {
 
     public DecalDto(Long id,
                     String name,
-                    String car,
+                    Car car,
                     String creator,
                     String company,
                     String series) {
@@ -33,7 +35,7 @@ public class DecalDto {
         return name;
     }
 
-    public String getCar() {
+    public Car getCar() {
         return car;
     }
 
@@ -57,7 +59,7 @@ public class DecalDto {
         this.name = name;
     }
 
-    public void setCar(String car) {
+    public void setCar(Car car) {
         this.car = car;
     }
 

@@ -68,4 +68,23 @@ public class DecalController {
 
         return ResponseEntity.ok().body(decalDto);
     }
+
+    @PutMapping("decals/{id}/cars/{carId}")
+    public void assignCartoDecal(
+            @PathVariable("id") Long id,
+            @PathVariable("carId") Long carId) {
+        decalService.assignCarToDecal(id, carId);
+    }
+
+
+//    @PutMapping("/{decalId}/cars/{carId}")
+//    Decal assignCarToDecal(
+//            @PathVariable Long decalId,
+//            @PathVariable Long carId
+//    ) {
+//        Decal decal = decalRepository.findById(decalId).get();
+//        Car car = carRepository.findById(carId).get();
+//        decal.setCar(car);
+//        return decalRepository.save(decal);
+//    }
 }

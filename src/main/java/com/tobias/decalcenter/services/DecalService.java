@@ -4,6 +4,7 @@ import com.tobias.decalcenter.dtos.DecalDto;
 import com.tobias.decalcenter.dtos.DecalInputDto;
 import com.tobias.decalcenter.exceptions.RecordNotFoundException;
 import com.tobias.decalcenter.models.Decal;
+import com.tobias.decalcenter.repositories.CarRepository;
 import com.tobias.decalcenter.repositories.DecalRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,12 @@ public class DecalService {
 
     private final DecalRepository decalRepository;
 
-    public DecalService(DecalRepository decalRepository) {this.decalRepository = decalRepository;}
+    private final CarRepository carRepository;
+
+    public DecalService(DecalRepository decalRepository, CarRepository carRepository) {
+        this.decalRepository = decalRepository;
+        this.carRepository = carRepository;
+    }
 
     public List<DecalDto> getAllDecals() {
         List<Decal> decalList = decalRepository.findAll();
@@ -39,7 +45,7 @@ public class DecalService {
     }
 
     public DecalDto getDecalById(Long id) {
-        if(decalRepository.findById(id).isPresent()) {
+        if (decalRepository.findById(id).isPresent()) {
             Decal decal = decalRepository.findById(id).get();
 
             return transferToDto(decal);
@@ -61,7 +67,7 @@ public class DecalService {
     }
 
     public DecalDto updateDecal(Long id, DecalInputDto decalInputDto) {
-        if (decalRepository.findById(id).isPresent()){
+        if (decalRepository.findById(id).isPresent()) {
             Decal decal = decalRepository.findById(id).get();
 
             Decal decal1 = transferToDecal(decalInputDto);
@@ -96,4 +102,20 @@ public class DecalService {
         decalDto.setSeries(decal.getSeries());
         return decalDto;
     }
+
+    public void assignCarToDecal(Long id, Long carId) {
+        var optionalDecal = decalRepository.findById(id);
+        var optionalCar = carRepository.findById(carId);
+
+        if (optionalDecal.isPresent() && optionalCar.isPresent()) {
+            var decal = optionalDecal.get();
+            var car = optionalCar.get();
+
+            decal.setCar(car);
+            decalRepository.save(decal);
+        } else {
+            throw new RecordNotFoundException();
+        }
+    }
+
 }

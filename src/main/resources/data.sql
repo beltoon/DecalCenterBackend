@@ -10,11 +10,11 @@ INSERT INTO cars (id, name, brand, type, category) VALUES (1009, 'NASCAR XFINITY
 INSERT INTO cars (id, name, brand, type, category) VALUES (1010, 'Dallara P217', 'Dallara', 'road', 'lmp2');
 
 
-INSERT INTO decals (id, name, car, creator, company, series) VALUES (1001, 'TREQ M4 branding', 'BMW M4 GT3', 'TREQ Simracing Equipment', 'TREQ', 'IMSA');
-INSERT INTO decals (id, name, car, creator, company, series) VALUES (1002, 'Heusinkveld Audi R8 branding', 'Audi R8 LMS', 'Heusinkveld Engineering', 'Heusinkveld Engineering', 'VRS');
-INSERT INTO decals (id, name, car, creator, company, series) VALUES (1003, 'IRNL Ferrari Fixed', 'Ferrari 488 GT3 Evo 2020', 'iRacing Nederland', 'Joepie', 'private series');
+INSERT INTO decals (id, name, creator, company, series) VALUES (1001, 'TREQ M4 branding', 'TREQ Simracing Equipment', 'TREQ', 'IMSA');
+INSERT INTO decals (id, name, creator, company, series) VALUES (1002, 'Heusinkveld Audi R8 branding', 'Heusinkveld Engineering', 'Heusinkveld Engineering', 'VRS');
+INSERT INTO decals (id, name, creator, company, series) VALUES (1003, 'iOverlay branding', 'Joepie', 'iOverlay inc.', 'World Series');
 
-INSERT INTO events (id, name, available_cars, private_event, event_date) VALUES (1001, 'Daytona 24hr', 'Mercedes-AMG GT3 2020', false, '25-12-2022');
+INSERT INTO events (id, name, available_decals, private_event, event_date) VALUES (1001, 'Daytona 24hr', 'TREQ M4 branding', false, '25-12-2022');
 
 INSERT INTO users (username, password, email, enabled) VALUES ('user', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica','user@test.nl', TRUE);
 INSERT INTO users (username, password, email, enabled) VALUES ('admin', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE);

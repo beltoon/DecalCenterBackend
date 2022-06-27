@@ -12,7 +12,7 @@ public class Event {
     Long id;
 
     private String name;
-    private String availableCars;
+    private String availableDecals;
     private Boolean privateEvent;
     private LocalDate eventDate;
 
@@ -20,12 +20,12 @@ public class Event {
 
     public Event(Long id,
                  String name,
-                 String availableCars,
+                 String availableDecals,
                  Boolean privateEvent,
                  LocalDate eventDate) {
         this.id = id;
         this.name = name;
-        this.availableCars = availableCars;
+        this.availableDecals = availableDecals;
         this.privateEvent = privateEvent;
         this.eventDate = eventDate;
     }
@@ -38,8 +38,8 @@ public class Event {
         return name;
     }
 
-    public String getAvailableCars() {
-        return availableCars;
+    public String getAvailableDecals() {
+        return availableDecals;
     }
 
     public Boolean getPrivateEvent() {
@@ -58,8 +58,8 @@ public class Event {
         this.name = name;
     }
 
-    public void setAvailableCars(String availableCars) {
-        this.availableCars = availableCars;
+    public void setAvailableDecals(String availableCars) {
+        this.availableDecals = availableCars;
     }
 
     public void setPrivateEvent(Boolean privateEvent) {

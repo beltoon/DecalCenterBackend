@@ -6,6 +6,8 @@ import com.tobias.decalcenter.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +21,13 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "")
+
+    @GetMapping(value = "/users/")
     public ResponseEntity<List<UserDto>> getUsers() {
 
         List<UserDto> userDtos = userService.getUsers();
@@ -33,17 +35,15 @@ public class UserController {
         return ResponseEntity.ok().body(userDtos);
     }
 
-    @GetMapping(value = "/{username}")
+    @GetMapping(value = "/users/{username}/")
     public ResponseEntity<UserDto> getUser(@PathVariable("username") String username) {
 
         UserDto optionalUser = userService.getUser(username);
 
-
         return ResponseEntity.ok().body(optionalUser);
-
     }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "/users/")
     public ResponseEntity<Object> createAccount(@Valid @RequestBody UserDto userDto, BindingResult br) {
         if (br.hasErrors()) {
             StringBuilder sb = new StringBuilder();
@@ -64,15 +64,15 @@ public class UserController {
         }
     }
 
-    @PutMapping(value = "/{username}")
-    public ResponseEntity<UserDto> updateAccount(@PathVariable("username") String username, @RequestBody UserDto dto) {
+    @PutMapping(value = "/users/{username}")
+    public ResponseEntity<UserDto> updateAccount(@PathVariable("username") String username, @RequestBody UserDto userDto) {
 
-        userService.updateUser(username, dto);
+        userService.updateUser(username, userDto);
 
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping(value = "/{username}")
+    @DeleteMapping(value = "/users/{username}")
     public ResponseEntity<Object> deleteAccount(@PathVariable("username") String username) {
         userService.deleteUser(username);
         return ResponseEntity.noContent().build();

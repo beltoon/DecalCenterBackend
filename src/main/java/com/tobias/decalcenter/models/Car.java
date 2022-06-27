@@ -1,6 +1,11 @@
 package com.tobias.decalcenter.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "cars")
@@ -9,6 +14,10 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "car")
+    List<Decal> decals;
 
     private String name;
     private String brand;

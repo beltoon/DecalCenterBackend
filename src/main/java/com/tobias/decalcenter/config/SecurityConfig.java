@@ -16,7 +16,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
@@ -29,17 +28,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
-    @Autowired
-    public CustomUserDetailsService customUserDetailsService;
+//    @Autowired
+//    public CustomUserDetailsService customUserDetailsService;
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource)
-
-
+        auth.jdbcAuthentication().passwordEncoder(new BCryptPasswordEncoder())
+                .dataSource(dataSource)
                 .usersByUsernameQuery("SELECT username, password, enabled "
                 + "FROM users "
                 + "WHERE username = ?")
@@ -47,21 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 + "FROM authorities "
                 + "WHERE username = ?");
 
-//        auth.userDetailsService(customUserDetailsService);
-    }
-
-    @Bean
-    public JdbcUserDetailsManager jdbcUserDetailsManager() throws Exception {
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
-        jdbcUserDetailsManager.setDataSource(dataSource);
-        return jdbcUserDetailsManager;
-    }
-
-
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+//        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
@@ -69,9 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder());
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Override
@@ -79,12 +64,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //JWT token authentication
         http
-                .cors().and().csrf().disable()
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users").permitAll()
-                .antMatchers(HttpMethod.GET,"/users").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST,"/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/users/").permitAll()
+                .antMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/users").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/users/*").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/cars/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/events/**").hasRole("ADMIN")
                 .antMatchers("/authenticated").authenticated()
                 .antMatchers("/authenticate").permitAll()
                 .anyRequest().permitAll()

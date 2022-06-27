@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class EventDto {
     private Long id;
     private String name;
-    private String availableCars;
+    private String availableDecals;
     private Boolean privateEvent;
     private LocalDate eventDate;
 
@@ -13,12 +13,12 @@ public class EventDto {
 
     public EventDto(Long id,
                     String name,
-                    String availableCars,
+                    String availableDecals,
                     Boolean privateEvent,
                     LocalDate eventDate) {
         this.id = id;
         this.name = name;
-        this.availableCars = availableCars;
+        this.availableDecals = availableDecals;
         this.privateEvent = privateEvent;
         this.eventDate = eventDate;
     }
@@ -31,8 +31,8 @@ public class EventDto {
         return name;
     }
 
-    public String getAvailableCars() {
-        return availableCars;
+    public String getAvailableDecals() {
+        return availableDecals;
     }
 
     public Boolean getPrivateEvent() {
@@ -51,8 +51,8 @@ public class EventDto {
         this.name = name;
     }
 
-    public void setAvailableCars(String availableCars) {
-        this.availableCars = availableCars;
+    public void setAvailableDecals(String availableDecals) {
+        this.availableDecals = availableDecals;
     }
 
     public void setPrivateEvent(Boolean privateEvent) {

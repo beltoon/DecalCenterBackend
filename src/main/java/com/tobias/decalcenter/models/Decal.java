@@ -11,7 +11,10 @@ public class Decal {
     Long id;
 
     private String name;
-    private String car;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="car_id")
+    private Car car;
     private String creator;
     private String company;
     private String series;
@@ -20,7 +23,7 @@ public class Decal {
 
     public Decal(Long id,
                  String name,
-                 String car,
+                 Car car,
                  String creator,
                  String company,
                  String series) {
@@ -40,7 +43,7 @@ public class Decal {
         return name;
     }
 
-    public String getCar() {
+    public Car getCar() {
         return car;
     }
 
@@ -64,7 +67,7 @@ public class Decal {
         this.name = name;
     }
 
-    public void setCar(String car) {
+    public void setCar(Car car) {
         this.car = car;
     }
 

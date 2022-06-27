@@ -4,16 +4,16 @@ import java.time.LocalDate;
 
 public class EventInputDto {
     private String name;
-    private String availableCars;
+    private String availableDecals;
     private Boolean privateEvent;
     private LocalDate eventDate;
 
     public EventInputDto(String name,
-                         String availableCars,
+                         String availableDecals,
                          Boolean privateEvent,
                          LocalDate eventDate) {
         this.name = name;
-        this.availableCars = availableCars;
+        this.availableDecals = availableDecals;
         this.privateEvent = privateEvent;
         this.eventDate = eventDate;
     }
@@ -22,8 +22,8 @@ public class EventInputDto {
         return name;
     }
 
-    public String getAvailableCars() {
-        return availableCars;
+    public String getAvailableDecals() {
+        return availableDecals;
     }
 
     public Boolean getPrivateEvent() {
@@ -38,8 +38,8 @@ public class EventInputDto {
         this.name = name;
     }
 
-    public void setAvailableCars(String availableCars) {
-        this.availableCars = availableCars;
+    public void setAvailableDecals(String availableDecals) {
+        this.availableDecals = availableDecals;
     }
 
     public void setPrivateEvent(Boolean privateEvent) {
