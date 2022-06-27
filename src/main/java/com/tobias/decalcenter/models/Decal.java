@@ -13,7 +13,11 @@ public class Decal {
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="car_id")
+    @JoinColumn(name = "event_id")
+    private Event event;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "car_id")
     private Car car;
     private String creator;
     private String company;
@@ -81,5 +85,9 @@ public class Decal {
 
     public void setSeries(String event) {
         this.series = event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 }
