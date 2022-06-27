@@ -1,6 +1,7 @@
 package com.tobias.decalcenter.services;
 
 import com.tobias.decalcenter.dtos.UserDto;
+import com.tobias.decalcenter.exceptions.EmailExistsException;
 import com.tobias.decalcenter.exceptions.RecordNotFoundException;
 import com.tobias.decalcenter.models.Authority;
 import com.tobias.decalcenter.models.User;
@@ -8,6 +9,7 @@ import com.tobias.decalcenter.repositories.UserRepository;
 import com.tobias.decalcenter.util.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,9 +38,9 @@ public class UserService {
     public UserDto getUser(String username) {
         UserDto dto = new UserDto();
         Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()){
+        if (user.isPresent()) {
             dto = fromUser(user.get());
-        }else {
+        } else {
             throw new UsernameNotFoundException(username);
         }
         return dto;
@@ -89,7 +91,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public static UserDto fromUser(User user){
+    public static UserDto fromUser(User user) {
 
         var dto = new UserDto();
 
@@ -106,7 +108,7 @@ public class UserService {
     public User toUser(UserDto userDto) {
 
         var user = new User();
-
+//        user.setId(userDto.getId());
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setEnabled(userDto.getEnabled());

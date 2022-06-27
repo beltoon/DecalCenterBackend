@@ -16,6 +16,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/users")
@@ -43,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<Object> createUser(@Valid @RequestBody UserDto userDto, BindingResult br) {
+    public ResponseEntity<Object> createAccount(@Valid @RequestBody UserDto userDto, BindingResult br) {
         if (br.hasErrors()) {
             StringBuilder sb = new StringBuilder();
             for (FieldError fe : br.getFieldErrors()) {
@@ -53,7 +54,6 @@ public class UserController {
             return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
         }
         else {
-
             String newUsername = userService.createUser(userDto);
             userService.addAuthority(newUsername, "ROLE_USER");
 
@@ -65,7 +65,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{username}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("username") String username, @RequestBody UserDto dto) {
+    public ResponseEntity<UserDto> updateAccount(@PathVariable("username") String username, @RequestBody UserDto dto) {
 
         userService.updateUser(username, dto);
 
@@ -73,7 +73,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/{username}")
-    public ResponseEntity<Object> deleteClient(@PathVariable("username") String username) {
+    public ResponseEntity<Object> deleteAccount(@PathVariable("username") String username) {
         userService.deleteUser(username);
         return ResponseEntity.noContent().build();
     }

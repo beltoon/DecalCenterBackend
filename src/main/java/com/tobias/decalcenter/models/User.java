@@ -9,6 +9,8 @@ import java.util.Set;
 public class User {
 
     @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    Long id;
     @Column(nullable = false, unique = true)
     private String username;
 
@@ -32,22 +34,57 @@ public class User {
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) {
-        this.username = username;
+//    public Long getId() {
+//        return id;
+//    }
+
+    public String getUsername() {
+        return username;
     }
+
     public String getPassword() {
         return password;
     }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public String getApikey() {
+        return apikey;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isEnabled() { return enabled;}
-    public void setEnabled(boolean enabled) { this.enabled = enabled; }
-    public String getApikey() { return apikey; }
-    public void setApikey(String apikey) { this.apikey = apikey; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email;}
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public void setApikey(String apikey) {
+        this.apikey = apikey;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
 
     public Set<Authority> getAuthorities() { return authorities; }
     public void addAuthority(Authority authority) {

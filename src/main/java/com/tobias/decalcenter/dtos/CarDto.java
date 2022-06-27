@@ -1,5 +1,8 @@
 package com.tobias.decalcenter.dtos;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 public class CarDto {
     private Long id;
     private String name;
