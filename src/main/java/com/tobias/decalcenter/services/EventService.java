@@ -84,7 +84,7 @@ public class EventService {
         var event = new Event();
 
         event.setName(eventDto.getName());
-        event.setAvailableDecals(eventDto.getAvailableDecals());
+        event.setEventDecals(eventDto.getEventDecals());
         event.setPrivateEvent(eventDto.getPrivateEvent());
         event.setEventDate(eventDto.getEventDate());
 
@@ -95,7 +95,7 @@ public class EventService {
         EventDto eventDto = new EventDto();
         eventDto.setId(event.getId());
         eventDto.setName(event.getName());
-        eventDto.setAvailableDecals(event.getAvailableDecals());
+        eventDto.setEventDecals(event.getEventDecals());
         eventDto.setPrivateEvent(event.getPrivateEvent());
         eventDto.setEventDate(event.getEventDate());
         return eventDto;

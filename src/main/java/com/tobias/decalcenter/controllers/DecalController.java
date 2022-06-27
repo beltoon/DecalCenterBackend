@@ -69,37 +69,20 @@ public class DecalController {
         return ResponseEntity.ok().body(decalDto);
     }
 
-    @PutMapping("decals/{id}/cars/{carId}")
+    @PutMapping("decals/{decalId}/cars/{carId}")
     public void assignCarToDecal(
-            @PathVariable("id") Long id,
-            @PathVariable("carId") Long carId) {
-        decalService.assignCarToDecal(id, carId);
+            @PathVariable("decalId") Long decalId,
+            @PathVariable("carId") Long carId
+    ) {
+        decalService.assignCarToDecal(decalId, carId);
     }
 
-//    @PutMapping("decals/{id}/events/{eventId}")
-//    public void assignEventToDecal(
-//            @PathVariable("id") Long id,
-//            @PathVariable("eventId") Long eventId) {
-//        decalService.assignEventToDecal(id, eventId);
-//    }
-
-    @PutMapping("decals/{id}/events/{eventId}")
-    public void assignDecalToEvent(
-            @PathVariable("id") Long id,
-            @PathVariable("eventId") Long eventId) {
-        decalService.assignDecalToEvent(id, eventId);
+    @PutMapping("events/{eventId}/decals/{decalId}")
+    public void addDecalToEvent(
+            @PathVariable("decalId") Long decalId,
+            @PathVariable("eventId") Long eventId
+    ) {
+        decalService.addDecalToEvent(eventId, decalId);
     }
 
-
-
-//    @PutMapping("/{decalId}/cars/{carId}")
-//    Decal assignCarToDecal(
-//            @PathVariable Long decalId,
-//            @PathVariable Long carId
-//    ) {
-//        Decal decal = decalRepository.findById(decalId).get();
-//        Car car = carRepository.findById(carId).get();
-//        decal.setCar(car);
-//        return decalRepository.save(decal);
-//    }
 }

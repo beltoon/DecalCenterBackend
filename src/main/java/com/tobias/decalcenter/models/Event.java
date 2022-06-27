@@ -1,10 +1,7 @@
 package com.tobias.decalcenter.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,9 +13,12 @@ public class Event {
     @GeneratedValue
     Long id;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "car")
-    private Set<Decal> availableDecals = new HashSet<>();
+    @ManyToMany(mappedBy = "eventDecals")
+    public Set<Decal> eventDecals = new HashSet<>();
+
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "car")
+//    private Set<Decal> availableDecals = new HashSet<>();
 
     private String name;
     private Boolean privateEvent;
@@ -26,15 +26,15 @@ public class Event {
 
     public Event() {}
 
-    public Event(Long id, Set<Decal> availableDecals, String name, Boolean privateEvent, LocalDate eventDate) {
+    public Event(Long id, Set<Decal> eventDecals, String name, Boolean privateEvent, LocalDate eventDate) {
         this.id = id;
-        this.availableDecals = availableDecals;
+        this.eventDecals = eventDecals;
         this.name = name;
         this.privateEvent = privateEvent;
         this.eventDate = eventDate;
     }
 
-    //    public Event(Long id,
+//    public Event(Long id,
 //                 String name,
 //                 String availableDecals,
 //                 Boolean privateEvent,
@@ -47,8 +47,8 @@ public class Event {
 //    }
 
 
-    public Set<Decal> getAvailableDecals() {
-        return availableDecals;
+    public Set<Decal> getEventDecals() {
+        return eventDecals;
     }
 
     public Long getId() {
@@ -67,10 +67,6 @@ public class Event {
         return eventDate;
     }
 
-    public void setAvailableDecals(Set<Decal> decals) {
-        this.availableDecals = decals;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -87,4 +83,7 @@ public class Event {
         this.eventDate = eventDate;
     }
 
+    public void setEventDecals(Set<Decal> eventDecals) {
+        this.eventDecals = eventDecals;
+    }
 }

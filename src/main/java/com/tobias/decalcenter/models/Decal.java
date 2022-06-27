@@ -1,6 +1,8 @@
 package com.tobias.decalcenter.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "decals")
@@ -12,9 +14,13 @@ public class Decal {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "event_id")
-    private Event event;
+    @ManyToMany
+    @JoinTable(
+            name = "event_decals",
+            joinColumns = @JoinColumn(name = "decal_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private Set<Event> eventDecals = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id")
@@ -37,6 +43,10 @@ public class Decal {
         this.creator = creator;
         this.company = company;
         this.series = series;
+    }
+
+    public Set<Event> getEventDecals() {
+        return eventDecals;
     }
 
     public Long getId() {
@@ -63,6 +73,10 @@ public class Decal {
         return series;
     }
 
+    public void setEventDecals(Set<Event> events) {
+        this.eventDecals = events;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -87,7 +101,4 @@ public class Decal {
         this.series = event;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
-    }
 }

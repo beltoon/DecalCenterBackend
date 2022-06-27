@@ -122,17 +122,17 @@ public class DecalService {
         }
     }
 
-    public void assignDecalToEvent(Long decalId, Long eventId) {
-        var optionalDecal = decalRepository.findById(decalId);
+    public void addDecalToEvent(Long decalId, Long eventId) {
         var optionalEvent = eventRepository.findById(eventId);
+        var optionalDecal = decalRepository.findById(decalId);
 
-        if (optionalDecal.isPresent() && optionalEvent.isPresent()) {
-            var decal = optionalDecal.get();
+        if (optionalEvent.isPresent() && optionalDecal.isPresent()) {
             var event = optionalEvent.get();
+            var decal = optionalDecal.get();
 
-            decal.setEvent(event);
-            decalRepository.save(decal);
 
+            event.eventDecals.add(decal);
+            eventRepository.save(event);
         } else {
             throw new RecordNotFoundException();
         }
