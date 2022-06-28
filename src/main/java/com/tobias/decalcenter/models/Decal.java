@@ -20,16 +20,19 @@ public class Decal {
             joinColumns = @JoinColumn(name = "decal_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    public Set<Event> eventDecals = new HashSet<>();
+    private Set<Decal> eventDecals = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "car_id")
+    //    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "car_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
     private String creator;
     private String company;
     private String series;
 
-    public Decal() {}
+    public Decal() {
+    }
 
     public Decal(Long id,
                  String name,
@@ -43,10 +46,6 @@ public class Decal {
         this.creator = creator;
         this.company = company;
         this.series = series;
-    }
-
-    public Set<Event> getEventDecals() {
-        return eventDecals;
     }
 
     public Long getId() {
@@ -73,10 +72,6 @@ public class Decal {
         return series;
     }
 
-    public void setEventDecals(Set<Event> events) {
-        this.eventDecals = events;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -101,4 +96,8 @@ public class Decal {
         this.series = event;
     }
 
+
+//    public void eventDecals(Decal decal) {
+//        eventDecals.add(decal);
+//    }
 }

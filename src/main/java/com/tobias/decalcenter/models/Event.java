@@ -11,10 +11,11 @@ public class Event {
 
     @Id
     @GeneratedValue
-    Long id;
+    private Long id;
 
-    @ManyToMany(mappedBy = "eventDecals")
-    public Set<Decal> decals = new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "decal_id")
+    private Set<Decal> addEventDecals = new HashSet<>();
 
 //    @JsonIgnore
 //    @OneToMany(mappedBy = "car")
@@ -28,7 +29,7 @@ public class Event {
 
     public Event(Long id, Set<Decal> decals, String name, Boolean privateEvent, LocalDate eventDate) {
         this.id = id;
-        this.decals = decals;
+        this.addEventDecals = addEventDecals;
         this.name = name;
         this.privateEvent = privateEvent;
         this.eventDate = eventDate;
@@ -47,8 +48,8 @@ public class Event {
 //    }
 
 
-    public Set<Decal> getDecals() {
-        return decals;
+    public Set<Decal> getAddEventDecals() {
+        return addEventDecals;
     }
 
     public Long getId() {
@@ -83,7 +84,11 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    public void setDecals(Set<Decal> decals) {
-        this.decals = decals;
+    public void setAddEventDecals(Set<Decal> decals) {
+        this.addEventDecals = addEventDecals;
+    }
+
+    public void eventDecals(Decal decal) {
+        addEventDecals.add(decal);
     }
 }

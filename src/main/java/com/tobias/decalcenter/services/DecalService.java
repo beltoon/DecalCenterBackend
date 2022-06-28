@@ -4,6 +4,7 @@ import com.tobias.decalcenter.dtos.DecalDto;
 import com.tobias.decalcenter.dtos.DecalInputDto;
 import com.tobias.decalcenter.exceptions.RecordNotFoundException;
 import com.tobias.decalcenter.models.Decal;
+import com.tobias.decalcenter.models.Event;
 import com.tobias.decalcenter.repositories.CarRepository;
 import com.tobias.decalcenter.repositories.DecalRepository;
 import com.tobias.decalcenter.repositories.EventRepository;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DecalService {
@@ -127,13 +130,12 @@ public class DecalService {
         var optionalDecal = decalRepository.findById(decalId);
 
         if (optionalEvent.isPresent() && optionalDecal.isPresent()) {
-            var event = optionalEvent.get();
-            var decal = optionalDecal.get();
+            Event event = optionalEvent.get();
+            Decal decal = optionalDecal.get();
 
+            event.eventDecals(decal);
+            decalRepository.save(decal);
 
-            event.decals.add(decal);
-//            eventRepository.save(event);
-            decal.eventDecals.add(event);
         } else {
             throw new RecordNotFoundException();
         }
