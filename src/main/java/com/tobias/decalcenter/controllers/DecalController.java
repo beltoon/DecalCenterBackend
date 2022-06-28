@@ -21,7 +21,8 @@ public class DecalController {
     }
 
     @GetMapping("/decals")
-    public ResponseEntity<List<DecalDto>> getAllDecals(@RequestParam(value = "name", required = false) Optional<String> name) {
+    public ResponseEntity<List<DecalDto>> getAllDecals(
+            @RequestParam(value = "name", required = false) Optional<String> name) {
 
         List<DecalDto> decalDtos;
 
@@ -38,7 +39,8 @@ public class DecalController {
     }
 
     @GetMapping("/decals/{id}")
-    public ResponseEntity<Object> getDecal(@PathVariable("id") Long id) {
+    public ResponseEntity<Object> getDecal(
+            @PathVariable("id") Long id) {
 
         DecalDto decal = decalService.getDecalById(id);
 
@@ -46,7 +48,8 @@ public class DecalController {
     }
 
     @PostMapping("/decals")
-    public ResponseEntity<Object> addDecal(@RequestBody DecalInputDto decalInputDto) {
+    public ResponseEntity<Object> addDecal(
+            @RequestBody DecalInputDto decalInputDto) {
 
         DecalDto decalDto = decalService.addDecal(decalInputDto);
 
@@ -54,7 +57,8 @@ public class DecalController {
     }
 
     @DeleteMapping("/decals/{id}")
-    public ResponseEntity<Object> deleteDecal(@PathVariable Long id) {
+    public ResponseEntity<Object> deleteDecal(
+            @PathVariable Long id) {
 
         decalService.deleteDecal(id);
 
@@ -62,7 +66,9 @@ public class DecalController {
     }
 
     @PutMapping("/decals/{id}")
-    public ResponseEntity<Object> updateDecal(@PathVariable Long id, @RequestBody DecalInputDto newDecal) {
+    public ResponseEntity<Object> updateDecal(
+            @PathVariable Long id,
+            @RequestBody DecalInputDto newDecal) {
 
         DecalDto decalDto = decalService.updateDecal(id, newDecal);
 

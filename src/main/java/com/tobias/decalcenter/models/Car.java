@@ -3,10 +3,7 @@ package com.tobias.decalcenter.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
 
 @Entity
 @Table(name = "cars")
@@ -25,7 +22,8 @@ public class Car {
     private String type;
     private String category;
 
-    public Car() {}
+    public Car() {
+    }
 
     public Car(Long id,
                String name,

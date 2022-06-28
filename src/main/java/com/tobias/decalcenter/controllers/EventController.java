@@ -16,14 +16,16 @@ public class EventController {
     private final EventService eventService;
 
     @Autowired
-    public EventController(EventService eventService) { this.eventService = eventService;}
+    public EventController(EventService eventService) {
+        this.eventService = eventService;
+    }
 
     @GetMapping("/events")
     public ResponseEntity<List<EventDto>> getAllEvents(@RequestParam(value = "name", required = false) Optional<String> name) {
 
         List<EventDto> eventDtos;
 
-        if (name.isEmpty()){
+        if (name.isEmpty()) {
 
             eventDtos = eventService.getAllEvents();
 

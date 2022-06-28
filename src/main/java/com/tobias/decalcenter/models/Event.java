@@ -17,15 +17,12 @@ public class Event {
     @JoinColumn(name = "decal_id")
     private Set<Decal> addEventDecals = new HashSet<>();
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "car")
-//    private Set<Decal> availableDecals = new HashSet<>();
-
     private String name;
     private Boolean privateEvent;
     private LocalDate eventDate;
 
-    public Event() {}
+    public Event() {
+    }
 
     public Event(Long id, Set<Decal> decals, String name, Boolean privateEvent, LocalDate eventDate) {
         this.id = id;
@@ -34,19 +31,6 @@ public class Event {
         this.privateEvent = privateEvent;
         this.eventDate = eventDate;
     }
-
-//    public Event(Long id,
-//                 String name,
-//                 String availableDecals,
-//                 Boolean privateEvent,
-//                 LocalDate eventDate) {
-//        this.id = id;
-//        this.name = name;
-//        this.availableDecals = availableDecals;
-//        this.privateEvent = privateEvent;
-//        this.eventDate = eventDate;
-//    }
-
 
     public Set<Decal> getAddEventDecals() {
         return addEventDecals;

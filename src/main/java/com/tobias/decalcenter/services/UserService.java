@@ -1,7 +1,6 @@
 package com.tobias.decalcenter.services;
 
 import com.tobias.decalcenter.dtos.UserDto;
-import com.tobias.decalcenter.exceptions.EmailExistsException;
 import com.tobias.decalcenter.exceptions.RecordNotFoundException;
 import com.tobias.decalcenter.models.Authority;
 import com.tobias.decalcenter.models.User;
@@ -9,7 +8,6 @@ import com.tobias.decalcenter.repositories.UserRepository;
 import com.tobias.decalcenter.util.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,12 +21,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private AuthorityRepository authorityRepository;
-
     public List<UserDto> getUsers() {
         List<UserDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
+
         for (User user : list) {
             collection.add(fromUser(user));
         }
@@ -38,6 +34,7 @@ public class UserService {
     public UserDto getUser(String username) {
         UserDto dto = new UserDto();
         Optional<User> user = userRepository.findById(username);
+
         if (user.isPresent()) {
             dto = fromUser(user.get());
         } else {
@@ -54,6 +51,7 @@ public class UserService {
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
         User newUser = userRepository.save(toUser(userDto));
+
         return newUser.getUsername();
     }
 
@@ -62,16 +60,20 @@ public class UserService {
     }
 
     public void updateUser(String username, UserDto newUser) {
+
         if (!userRepository.existsById(username)) throw new RecordNotFoundException();
         User user = userRepository.findById(username).get();
         user.setPassword(newUser.getPassword());
+
         userRepository.save(user);
     }
 
     public Set<Authority> getAuthorities(String username) {
+
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
         User user = userRepository.findById(username).get();
         UserDto userDto = fromUser(user);
+
         return userDto.getAuthorities();
     }
 
@@ -80,14 +82,20 @@ public class UserService {
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
         User user = userRepository.findById(username).get();
         user.addAuthority(new Authority(username, authority));
+
         userRepository.save(user);
     }
 
     public void removeAuthority(String username, String authority) {
+
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
         User user = userRepository.findById(username).get();
-        Authority authorityToRemove = user.getAuthorities().stream().filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().get();
+        Authority authorityToRemove = user
+                .getAuthorities()
+                .stream()
+                .filter((a) -> a.getAuthority().equalsIgnoreCase(authority)).findAny().get();
         user.removeAuthority(authorityToRemove);
+
         userRepository.save(user);
     }
 
@@ -108,7 +116,6 @@ public class UserService {
     public User toUser(UserDto userDto) {
 
         var user = new User();
-//        user.setId(userDto.getId());
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
         user.setEnabled(userDto.getEnabled());

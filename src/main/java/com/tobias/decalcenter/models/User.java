@@ -32,10 +32,6 @@ public class User {
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
-//    public Long getId() {
-//        return id;
-//    }
-
     public String getUsername() {
         return username;
     }
@@ -55,10 +51,6 @@ public class User {
     public String getEmail() {
         return email;
     }
-
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -84,10 +76,14 @@ public class User {
         this.authorities = authorities;
     }
 
-    public Set<Authority> getAuthorities() { return authorities; }
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
     }
+
     public void removeAuthority(Authority authority) {
         this.authorities.remove(authority);
     }

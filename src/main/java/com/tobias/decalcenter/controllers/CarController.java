@@ -21,11 +21,12 @@ public class CarController {
     }
 
     @GetMapping("/cars")
-    public ResponseEntity<List<CarDto>> getAllCars(@RequestParam(value = "name", required = false) Optional<String> name) {
+    public ResponseEntity<List<CarDto>> getAllCars(
+            @RequestParam(value = "name", required = false) Optional<String> name) {
 
         List<CarDto> carDtos;
 
-        if (name.isEmpty()){
+        if (name.isEmpty()) {
 
             carDtos = carService.getAllCars();
 
@@ -39,13 +40,17 @@ public class CarController {
     }
 
     @GetMapping("/cars/{id}")
-    public ResponseEntity<CarDto> getCar(@PathVariable("id") Long id) {
+    public ResponseEntity<CarDto> getCar(
+            @PathVariable("id") Long id) {
+
         CarDto car = carService.getCarById(id);
+
         return ResponseEntity.ok().body(car);
     }
 
     @PostMapping("/cars")
-    public ResponseEntity<Object> addCar(@RequestBody CarInputDto carInputDto) {
+    public ResponseEntity<Object> addCar(
+            @RequestBody CarInputDto carInputDto) {
 
         CarDto carDto = carService.addCar(carInputDto);
 
@@ -53,7 +58,8 @@ public class CarController {
     }
 
     @DeleteMapping("/cars/{id}")
-    public ResponseEntity<Object> deleteCar(@PathVariable Long id) {
+    public ResponseEntity<Object> deleteCar(
+            @PathVariable Long id) {
 
         carService.deleteCar(id);
 
@@ -61,7 +67,9 @@ public class CarController {
     }
 
     @PutMapping("/cars/{id}")
-    public ResponseEntity<Object> updateCar(@PathVariable Long id, @RequestBody CarInputDto newCar) {
+    public ResponseEntity<Object> updateCar(
+            @PathVariable Long id,
+            @RequestBody CarInputDto newCar) {
 
         CarDto carDto = carService.updateCar(id, newCar);
 

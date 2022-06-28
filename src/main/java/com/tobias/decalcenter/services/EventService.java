@@ -18,17 +18,23 @@ public class EventService {
 
     private final DecalService decalService;
 
-    public EventService(EventRepository eventRepository, DecalService decalService) {this.eventRepository = eventRepository;
+    public EventService(EventRepository eventRepository,
+                        DecalService decalService) {
+        this.eventRepository = eventRepository;
         this.decalService = decalService;
     }
 
     public List<EventDto> getAllEvents() {
+
         List<Event> eventList = eventRepository.findAll();
+
         return transferEventListToDtoList(eventList);
     }
 
     public List<EventDto> getAllEventsByName(String name) {
+
         List<Event> eventList = eventRepository.findAllEventsByNameEqualsIgnoreCase(name);
+
         return transferEventListToDtoList(eventList);
     }
 
@@ -43,6 +49,7 @@ public class EventService {
     }
 
     public EventDto getEventById(Long id) {
+
         if (eventRepository.findById(id).isPresent()) {
             Event event = eventRepository.findById(id).get();
 
@@ -74,8 +81,7 @@ public class EventService {
             eventRepository.save(event1);
 
             return transferToDto(event1);
-        }
-        else {
+        } else {
             throw new RecordNotFoundException("No event found...");
         }
     }
@@ -88,7 +94,7 @@ public class EventService {
         event.setPrivateEvent(eventDto.getPrivateEvent());
         event.setEventDate(eventDto.getEventDate());
 
-     return event;
+        return event;
     }
 
     public EventDto transferToDto(Event event) {
@@ -100,7 +106,6 @@ public class EventService {
         eventDto.setEventDate(event.getEventDate());
         return eventDto;
     }
-
 
 
 }

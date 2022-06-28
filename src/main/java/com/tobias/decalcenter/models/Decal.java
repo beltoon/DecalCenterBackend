@@ -22,8 +22,6 @@ public class Decal {
     )
     private Set<Decal> eventDecals = new HashSet<>();
 
-    //    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "car_id")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;

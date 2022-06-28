@@ -21,12 +21,16 @@ public class CarService {
     }
 
     public List<CarDto> getAllCars() {
+
         List<Car> carList = carRepository.findAll();
+
         return transferCarListToDtoList(carList);
     }
 
     public List<CarDto> getAllCarsByName(String name) {
+
         List<Car> carList = carRepository.findAllCarsByNameEqualsIgnoreCase(name);
+
         return transferCarListToDtoList(carList);
     }
 
@@ -41,9 +45,10 @@ public class CarService {
     }
 
     public CarDto getCarById(Long id) {
+
         if (carRepository.findById(id).isPresent()) {
             Car car = carRepository.findById(id).get();
-//            CarDto dto = transferToDto(c);
+
             return transferToDto(car);
         } else {
             throw new RecordNotFoundException("No car found...");
@@ -63,6 +68,7 @@ public class CarService {
     }
 
     public CarDto updateCar(Long id, CarInputDto carInputDto) {
+
         if (carRepository.findById(id).isPresent()) {
             Car car = carRepository.findById(id).get();
 

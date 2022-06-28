@@ -36,7 +36,8 @@ public class UserController {
     }
 
     @GetMapping(value = "/users/{username}/")
-    public ResponseEntity<UserDto> getUser(@PathVariable("username") String username) {
+    public ResponseEntity<UserDto> getUser(
+            @PathVariable("username") String username) {
 
         UserDto optionalUser = userService.getUser(username);
 
@@ -44,16 +45,20 @@ public class UserController {
     }
 
     @PostMapping(value = "/users/")
-    public ResponseEntity<Object> createAccount(@Valid @RequestBody UserDto userDto, BindingResult br) {
+    public ResponseEntity<Object> createAccount(
+            @Valid @RequestBody UserDto userDto, BindingResult br) {
+
         if (br.hasErrors()) {
             StringBuilder sb = new StringBuilder();
+
             for (FieldError fe : br.getFieldErrors()) {
                 sb.append(fe.getDefaultMessage());
                 sb.append("\n");
             }
             return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
-        }
-        else {
+
+        } else {
+
             String newUsername = userService.createUser(userDto);
             userService.addAuthority(newUsername, "ROLE_USER");
 
@@ -65,7 +70,8 @@ public class UserController {
     }
 
     @PutMapping(value = "/users/{username}")
-    public ResponseEntity<UserDto> updateAccount(@PathVariable("username") String username, @RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> updateAccount(
+            @PathVariable("username") String username, @RequestBody UserDto userDto) {
 
         userService.updateUser(username, userDto);
 
@@ -73,30 +79,43 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/users/{username}")
-    public ResponseEntity<Object> deleteAccount(@PathVariable("username") String username) {
+    public ResponseEntity<Object> deleteAccount(
+            @PathVariable("username") String username) {
+
         userService.deleteUser(username);
+
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping(value = "/{username}/authorities")
-    public ResponseEntity<Object> getUserAuthorities(@PathVariable("username") String username) {
+    public ResponseEntity<Object> getUserAuthorities(
+            @PathVariable("username") String username) {
+
         return ResponseEntity.ok().body(userService.getAuthorities(username));
     }
 
     @PostMapping(value = "/{username}/authorities")
-    public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody Map<String, Object> fields) {
+    public ResponseEntity<Object> addUserAuthority(
+            @PathVariable("username") String username,
+            @RequestBody Map<String, Object> fields) {
         try {
             String authorityName = (String) fields.get("authority");
             userService.addAuthority(username, authorityName);
+
             return ResponseEntity.noContent().build();
+
         } catch (Exception ex) {
+
             throw new BadRequestException();
         }
     }
 
     @DeleteMapping(value = "/{username}/authorities/{authority}")
-    public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
+    public ResponseEntity<Object> deleteUserAuthority(
+            @PathVariable("username") String username,
+            @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);
+
         return ResponseEntity.noContent().build();
     }
 }
