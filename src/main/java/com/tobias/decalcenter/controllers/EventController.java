@@ -21,17 +21,17 @@ public class EventController {
     }
 
     @GetMapping("/events")
-    public ResponseEntity<List<EventDto>> getAllEvents(@RequestParam(value = "name", required = false) Optional<String> name) {
+    public ResponseEntity<List<EventDto>> getAllEvents(@RequestParam(value = "eventName", required = false) Optional<String> eventName) {
 
         List<EventDto> eventDtos;
 
-        if (name.isEmpty()) {
+        if (eventName.isEmpty()) {
 
             eventDtos = eventService.getAllEvents();
 
         } else {
 
-            eventDtos = eventService.getAllEventsByName(name.get());
+            eventDtos = eventService.getAllEventsByName(eventName.get());
 
         }
 
@@ -39,8 +39,8 @@ public class EventController {
     }
 
     @GetMapping("/events/{id}")
-    public ResponseEntity<EventDto> getEvents(@PathVariable("id") Long id) {
-        EventDto event = eventService.getEventById(id);
+    public ResponseEntity<EventDto> getEvents(@PathVariable("id") Long eventId) {
+        EventDto event = eventService.getEventById(eventId);
         return ResponseEntity.ok().body(event);
     }
 
@@ -52,18 +52,20 @@ public class EventController {
         return ResponseEntity.created(null).body(eventDto);
     }
 
-    @DeleteMapping("/events/{id}")
-    public ResponseEntity<Object> deleteEvent(@PathVariable Long id) {
+    @DeleteMapping("/events/{eventId}")
+    public ResponseEntity<Object> deleteEvent(@PathVariable Long eventId) {
 
-        eventService.deleteEvent(id);
+        eventService.deleteEvent(eventId);
 
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/events/{id}")
-    public ResponseEntity<Object> updateEvent(@PathVariable Long id, @RequestBody EventInputDto newEvent) {
+    @PutMapping("/events/{eventId}")
+    public ResponseEntity<Object> updateEvent(
+            @PathVariable Long eventId,
+            @RequestBody EventInputDto newEvent) {
 
-        EventDto eventDto = eventService.updateEvent(id, newEvent);
+        EventDto eventDto = eventService.updateEvent(eventId, newEvent);
 
         return ResponseEntity.ok().body(eventDto);
     }
