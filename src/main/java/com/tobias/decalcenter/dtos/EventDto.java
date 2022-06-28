@@ -8,7 +8,7 @@ import java.util.Set;
 public class EventDto {
     private Long id;
     private String name;
-    private Set<Decal> eventDecals;
+    private Set<Decal> decals;
     private Boolean privateEvent;
     private LocalDate eventDate;
 
@@ -17,12 +17,12 @@ public class EventDto {
 
     public EventDto(Long id,
                     String name,
-                    Set<Decal> eventDecals,
+                    Set<Decal> decals,
                     Boolean privateEvent,
                     LocalDate eventDate) {
         this.id = id;
         this.name = name;
-        this.eventDecals = eventDecals;
+        this.decals = decals;
         this.privateEvent = privateEvent;
         this.eventDate = eventDate;
     }
@@ -35,8 +35,8 @@ public class EventDto {
         return name;
     }
 
-    public Set<Decal> getEventDecals() {
-        return eventDecals;
+    public Set<Decal> getDecals() {
+        return decals;
     }
 
     public Boolean getPrivateEvent() {
@@ -55,8 +55,8 @@ public class EventDto {
         this.name = name;
     }
 
-    public void setEventDecals(Set<Decal> eventDecals) {
-        this.eventDecals = eventDecals;
+    public void setDecals(Set<Decal> decals) {
+        this.decals = decals;
     }
 
     public void setPrivateEvent(Boolean privateEvent) {

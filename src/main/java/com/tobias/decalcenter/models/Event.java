@@ -14,7 +14,7 @@ public class Event {
     Long id;
 
     @ManyToMany(mappedBy = "eventDecals")
-    public Set<Decal> eventDecals = new HashSet<>();
+    public Set<Decal> decals = new HashSet<>();
 
 //    @JsonIgnore
 //    @OneToMany(mappedBy = "car")
@@ -26,9 +26,9 @@ public class Event {
 
     public Event() {}
 
-    public Event(Long id, Set<Decal> eventDecals, String name, Boolean privateEvent, LocalDate eventDate) {
+    public Event(Long id, Set<Decal> decals, String name, Boolean privateEvent, LocalDate eventDate) {
         this.id = id;
-        this.eventDecals = eventDecals;
+        this.decals = decals;
         this.name = name;
         this.privateEvent = privateEvent;
         this.eventDate = eventDate;
@@ -47,8 +47,8 @@ public class Event {
 //    }
 
 
-    public Set<Decal> getEventDecals() {
-        return eventDecals;
+    public Set<Decal> getDecals() {
+        return decals;
     }
 
     public Long getId() {
@@ -83,7 +83,7 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    public void setEventDecals(Set<Decal> eventDecals) {
-        this.eventDecals = eventDecals;
+    public void setDecals(Set<Decal> decals) {
+        this.decals = decals;
     }
 }

@@ -131,8 +131,9 @@ public class DecalService {
             var decal = optionalDecal.get();
 
 
-            event.eventDecals.add(decal);
-            eventRepository.save(event);
+            event.decals.add(decal);
+//            eventRepository.save(event);
+            decal.eventDecals.add(event);
         } else {
             throw new RecordNotFoundException();
         }

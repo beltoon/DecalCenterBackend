@@ -20,7 +20,7 @@ public class Decal {
             joinColumns = @JoinColumn(name = "decal_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private Set<Event> eventDecals = new HashSet<>();
+    public Set<Event> eventDecals = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id")
