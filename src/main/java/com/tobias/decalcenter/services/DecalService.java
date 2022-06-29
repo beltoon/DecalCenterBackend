@@ -103,6 +103,7 @@ public class DecalService {
 
         decal.setName(decalDto.getName());
         decal.setCar(decalDto.getCar());
+        decal.setDecalPosition(decalDto.getDecalPosition());
         decal.setCreator(decalDto.getCreator());
         decal.setCompany(decalDto.getCompany());
         decal.setSeries(decalDto.getSeries());
@@ -114,6 +115,7 @@ public class DecalService {
         decalDto.setId(decal.getId());
         decalDto.setName(decal.getName());
         decalDto.setCar(decal.getCar());
+        decalDto.setDecalPosition(decal.getDecalPosition());
         decalDto.setCreator(decal.getCreator());
         decalDto.setCompany(decal.getCompany());
         decalDto.setSeries(decal.getSeries());

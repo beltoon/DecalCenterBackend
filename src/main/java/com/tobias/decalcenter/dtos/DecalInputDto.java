@@ -5,17 +5,20 @@ import com.tobias.decalcenter.models.Car;
 public class DecalInputDto {
     private String name;
     private Car car;
+    private String decalPosition;
     private String creator;
     private String company;
     private String series;
 
     public DecalInputDto(String name,
                          Car car,
+                         String decalPosition,
                          String creator,
                          String company,
                          String series) {
         this.name = name;
         this.car = car;
+        this.decalPosition = decalPosition;
         this.creator = creator;
         this.company = company;
         this.series = series;
@@ -27,6 +30,10 @@ public class DecalInputDto {
 
     public Car getCar() {
         return car;
+    }
+
+    public String getDecalPosition() {
+        return decalPosition;
     }
 
     public String getCreator() {
@@ -47,6 +54,10 @@ public class DecalInputDto {
 
     public void setCar(Car car) {
         this.car = car;
+    }
+
+    public void setDecalPosition(String decalPosition) {
+        this.decalPosition = decalPosition;
     }
 
     public void setCreator(String creator) {
