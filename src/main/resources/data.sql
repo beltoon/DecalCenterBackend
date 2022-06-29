@@ -10,9 +10,9 @@ INSERT INTO cars (id, name, brand, type, category) VALUES (1009, 'NASCAR XFINITY
 INSERT INTO cars (id, name, brand, type, category) VALUES (1010, 'Dallara P217', 'Dallara', 'road', 'lmp2');
 
 
-INSERT INTO decals (id, name, creator, company, series) VALUES (1001, 'TREQ M4 branding', 'TREQ Simracing Equipment', 'TREQ', 'IMSA');
-INSERT INTO decals (id, name, creator, company, series) VALUES (1002, 'Heusinkveld Audi R8 branding', 'Heusinkveld Engineering', 'Heusinkveld Engineering', 'VRS');
-INSERT INTO decals (id, name, creator, company, series) VALUES (1003, 'iOverlay branding', 'Joepie', 'iOverlay inc.', 'World Series');
+INSERT INTO decals (id, name, decal_position, creator, company, series) VALUES (1001, 'TREQ M4 branding', 'top', 'TREQ Simracing Equipment', 'TREQ', 'IMSA');
+INSERT INTO decals (id, name, decal_position, creator, company, series) VALUES (1002, 'Heusinkveld Audi R8 branding', 'sides', 'Heusinkveld Engineering', 'Heusinkveld Engineering', 'VRS');
+INSERT INTO decals (id, name, decal_position, creator, company, series) VALUES (1003, 'iOverlay branding', 'Joepie', 'front', 'iOverlay inc.', 'World Series');
 
 INSERT INTO events (id, name, private_event, event_date) VALUES (1001, 'Daytona 24hr', false, '25-12-2022');
 INSERT INTO events (id, name, private_event, event_date) VALUES (1002, 'Watkins 6hr', false, '24-12-2022');

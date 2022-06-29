@@ -29,6 +29,7 @@ public class Decal {
     private String creator;
     private String company;
     private String series;
+// LOCALDATE toevoegen om te filteren op meest recente??
 
     public Decal() {
     }
