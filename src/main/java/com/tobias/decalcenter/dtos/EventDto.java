@@ -10,7 +10,7 @@ public class EventDto {
     private String name;
     private Boolean privateEvent;
     private LocalDate eventDate;
-    private Set<Decal> decal;
+    private Set<Decal> addedDecal;
 
     public Long getId() {
         return id;
@@ -28,8 +28,8 @@ public class EventDto {
         return eventDate;
     }
 
-    public Set<Decal> getDecal() {
-        return decal;
+    public Set<Decal> getAddedDecal() {
+        return addedDecal;
     }
 
     public void setId(Long id) {
@@ -48,7 +48,7 @@ public class EventDto {
         this.eventDate = eventDate;
     }
 
-    public void setDecal(Set<Decal> decal) {
-        this.decal = decal;
+    public void setAddedDecal(Set<Decal> addedDecal) {
+        this.addedDecal = addedDecal;
     }
 }

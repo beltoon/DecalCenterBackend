@@ -63,4 +63,8 @@ public class Event {
     public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
     }
+
+    public void setAddedDecals(Set<Decal> addedDecals) {
+        this.addedDecals = addedDecals;
+    }
 }

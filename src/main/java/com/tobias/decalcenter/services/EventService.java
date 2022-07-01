@@ -108,7 +108,7 @@ public class EventService {
         eventDto.setName(event.getName());
         eventDto.setPrivateEvent(event.getPrivateEvent());
         eventDto.setEventDate(event.getEventDate());
-        eventDto.setDecal(event.getAddedDecals());
+        eventDto.setAddedDecal(event.getAddedDecals());
         return eventDto;
     }
 
