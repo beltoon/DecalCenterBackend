@@ -2,11 +2,14 @@ package com.tobias.decalcenter.controllers;
 
 import com.tobias.decalcenter.dtos.DecalDto;
 import com.tobias.decalcenter.dtos.DecalInputDto;
+import com.tobias.decalcenter.models.FileUploadResponse;
 import com.tobias.decalcenter.services.DecalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,13 +17,17 @@ import java.util.Optional;
 public class DecalController {
 
     private final DecalService decalService;
+    private final ImageController imageController;
 
     @Autowired
-    public DecalController(DecalService decalService) {
+    public DecalController(DecalService decalService, ImageController imageController) {
         this.decalService = decalService;
+        this.imageController = imageController;
     }
 
+
     @GetMapping("/decals")
+    @Transactional
     public ResponseEntity<List<DecalDto>> getAllDecals(
             @RequestParam(value = "name", required = false) Optional<String> name) {
 
@@ -39,6 +46,7 @@ public class DecalController {
     }
 
     @GetMapping("/decals/{id}")
+    @Transactional
     public ResponseEntity<Object> getDecal(
             @PathVariable("id") Long id) {
 
@@ -48,6 +56,7 @@ public class DecalController {
     }
 
     @PostMapping("/decals")
+    @Transactional
     public ResponseEntity<Object> addDecal(
             @RequestBody DecalInputDto decalInputDto) {
 
@@ -81,6 +90,16 @@ public class DecalController {
             @PathVariable("carId") Long carId
     ) {
         decalService.assignCarToDecal(decalId, carId);
+    }
+
+    @PostMapping("/{id}/photo")
+    public void assignPhotoToStudent(@PathVariable("id") Long studentNumber,
+                                     @RequestBody MultipartFile file) {
+
+        FileUploadResponse decalImage = imageController.singleFileUpload(file);
+
+        decalService.assignImageToDecal(decalImage.getFileName(), studentNumber);
+
     }
 
 }

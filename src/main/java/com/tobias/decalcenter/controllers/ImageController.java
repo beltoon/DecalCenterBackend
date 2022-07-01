@@ -17,11 +17,11 @@ import java.util.Objects;
 @RestController
 @CrossOrigin
 public class ImageController {
-    private final ImageService service;
+    private final ImageService imageService;
 
 
-    public ImageController(ImageService service) {
-        this.service = service;
+    public ImageController(ImageService imageServiceservice) {
+        this.imageService = imageServiceservice;
     }
 
     //    post for single upload
@@ -33,7 +33,7 @@ public class ImageController {
 
         String contentType = file.getContentType();
 
-        String fileName = service.storeFile(file, url);
+        String fileName = imageService.storeFile(file, url);
 
         return new FileUploadResponse(fileName, contentType, url );
     }
@@ -42,7 +42,7 @@ public class ImageController {
     @GetMapping("/download/{fileName}")
     ResponseEntity<Resource> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
 
-        Resource resource = service.downLoadFile(fileName);
+        Resource resource = imageService.downLoadFile(fileName);
 
 //        this mediaType decides witch type you accept if you only accept 1 type
 //        MediaType contentType = MediaType.IMAGE_JPEG;

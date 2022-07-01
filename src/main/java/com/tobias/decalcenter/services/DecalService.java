@@ -5,14 +5,17 @@ import com.tobias.decalcenter.dtos.DecalInputDto;
 import com.tobias.decalcenter.exceptions.RecordNotFoundException;
 import com.tobias.decalcenter.models.Car;
 import com.tobias.decalcenter.models.Decal;
+import com.tobias.decalcenter.models.FileUploadResponse;
 import com.tobias.decalcenter.repositories.CarRepository;
 import com.tobias.decalcenter.repositories.DecalRepository;
 import com.tobias.decalcenter.repositories.EventRepository;
+import com.tobias.decalcenter.repositories.FileUploadRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DecalService {
@@ -23,12 +26,16 @@ public class DecalService {
 
     private final EventRepository eventRepository;
 
+    private final FileUploadRepository fileUploadRepository;
+
     public DecalService(DecalRepository decalRepository,
                         CarRepository carRepository,
-                        EventRepository eventRepository) {
+                        EventRepository eventRepository,
+                        FileUploadRepository fileUploadRepository) {
         this.decalRepository = decalRepository;
         this.carRepository = carRepository;
         this.eventRepository = eventRepository;
+        this.fileUploadRepository = fileUploadRepository;
     }
 
     public List<DecalDto> getAllDecals() {
@@ -134,4 +141,25 @@ public class DecalService {
             throw new RecordNotFoundException();
         }
     }
+
+    public void assignImageToDecal(String name, Long decalId) {
+
+        Optional<Decal> optionalDecal = decalRepository.findById(decalId);
+
+        Optional<FileUploadResponse> fileUploadResponse = fileUploadRepository.findByFileName(name);
+
+        if (optionalDecal.isPresent() && fileUploadResponse.isPresent()) {
+
+            FileUploadResponse photo = fileUploadResponse.get();
+
+            Decal decal = optionalDecal.get();
+
+            decal.setFile(photo);
+
+            decalRepository.save(decal);
+
+        }
+
+    }
+
 }
