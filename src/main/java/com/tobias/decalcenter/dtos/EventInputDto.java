@@ -3,13 +3,14 @@ package com.tobias.decalcenter.dtos;
 import com.tobias.decalcenter.models.Decal;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 
 public class EventInputDto {
     private String name;
     private Boolean privateEvent;
     private LocalDate eventDate;
-    private Decal decal;
+    private Set<Decal> eventDecals;
 
     public String getName() {
         return name;
@@ -23,8 +24,8 @@ public class EventInputDto {
         return eventDate;
     }
 
-    public Decal getDecal() {
-        return decal;
+    public Set<Decal> getEventDecals() {
+        return eventDecals;
     }
 
     public void setName(String name) {
@@ -39,7 +40,7 @@ public class EventInputDto {
         this.eventDate = eventDate;
     }
 
-    public void setDecal(Decal decal) {
-        this.decal = decal;
+    public void setEventDecals(Set<Decal> eventDecals) {
+        this.eventDecals = eventDecals;
     }
 }

@@ -22,6 +22,7 @@ INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) 
 
 INSERT INTO events (id, name, private_event, event_date) VALUES (1001, 'Daytona 24hr', false, '25-12-2022');
 INSERT INTO events (id, name, private_event, event_date) VALUES (1002, 'Watkins 6hr', false, '24-12-2022');
+INSERT INTO events (id, name, private_event, event_date) VALUES (1003, 'Spa 24hr', false, '1-12-2022');
 
 INSERT INTO event_decals (event_id, decal_id) VALUES (1001, 1001);
 INSERT INTO event_decals (event_id, decal_id) VALUES (1001, 1002);
@@ -30,10 +31,8 @@ INSERT INTO event_decals (event_id, decal_id) VALUES (1002, 1005);
 INSERT INTO event_decals (event_id, decal_id) VALUES (1002, 1006);
 INSERT INTO event_decals (event_id, decal_id) VALUES (1002, 1008);
 
-
 INSERT INTO users (username, password, email, enabled) VALUES ('user', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica','user@test.nl', TRUE);
 INSERT INTO users (username, password, email, enabled) VALUES ('admin', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE);
-
 
 INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');
 INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_USER');

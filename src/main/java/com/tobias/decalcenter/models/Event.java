@@ -22,6 +22,7 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "decal_id")
     )
     Set<Decal> eventDecals = new HashSet<>();
+
     private Boolean privateEvent;
     private LocalDate eventDate;
 

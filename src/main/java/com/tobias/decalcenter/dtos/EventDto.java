@@ -49,6 +49,6 @@ public class EventDto {
     }
 
     public void setEventDecals(Set<Decal> eventDecals) {
-        this.eventDate = eventDate;
+        this.eventDecals = eventDecals;
     }
 }
