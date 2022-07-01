@@ -21,15 +21,15 @@ public class Event {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "decal_id")
     )
-    Set<Decal> addedDecals = new HashSet<>();
+    Set<Decal> eventDecals = new HashSet<>();
     private Boolean privateEvent;
     private LocalDate eventDate;
 
     public Event() {
     }
 
-    public Set<Decal> getAddedDecals() {
-        return addedDecals;
+    public Set<Decal> getEventDecals() {
+        return eventDecals;
     }
 
     public Long getId() {
@@ -64,7 +64,7 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    public void setAddedDecals(Set<Decal> addedDecals) {
-        this.addedDecals = addedDecals;
+    public void setEventDecals(Set<Decal> eventDecals) {
+        this.eventDecals = eventDecals;
     }
 }

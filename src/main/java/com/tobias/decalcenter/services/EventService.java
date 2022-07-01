@@ -108,14 +108,14 @@ public class EventService {
         eventDto.setName(event.getName());
         eventDto.setPrivateEvent(event.getPrivateEvent());
         eventDto.setEventDate(event.getEventDate());
-        eventDto.setAddedDecal(event.getAddedDecals());
+        eventDto.setEventDecals(event.getEventDecals());
         return eventDto;
     }
 
     public Event addDecalToEvent(Long decalId, Long eventId) {
         Event event = eventRepository.findById(eventId).get();
         Decal decal = decalRepository.findById(decalId).get();
-        event.getAddedDecals().add(decal);
+        event.getEventDecals().add(decal);
         return eventRepository.save(event);
     }
 }

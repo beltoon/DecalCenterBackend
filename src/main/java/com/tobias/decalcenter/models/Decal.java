@@ -17,7 +17,7 @@ public class Decal {
     private String name;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "addedDecals")
+    @ManyToMany(mappedBy = "eventDecals")
     private Set<Event> events = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
