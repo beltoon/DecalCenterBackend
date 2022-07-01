@@ -58,6 +58,10 @@ public class Decal {
         return name;
     }
 
+    public Set<Decal> getEventDecals() {
+        return eventDecals;
+    }
+
     public Car getCar() {
         return car;
     }
@@ -84,6 +88,10 @@ public class Decal {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setEventDecals(Set<Decal> eventDecals) {
+        this.eventDecals = eventDecals;
     }
 
     public void setCar(Car car) {
