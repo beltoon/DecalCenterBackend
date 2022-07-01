@@ -10,20 +10,6 @@ public class DecalInputDto {
     private String company;
     private String series;
 
-    public DecalInputDto(String name,
-                         Car car,
-                         String decalPosition,
-                         String creator,
-                         String company,
-                         String series) {
-        this.name = name;
-        this.car = car;
-        this.decalPosition = decalPosition;
-        this.creator = creator;
-        this.company = company;
-        this.series = series;
-    }
-
     public String getName() {
         return name;
     }

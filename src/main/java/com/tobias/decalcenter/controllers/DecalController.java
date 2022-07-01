@@ -83,12 +83,4 @@ public class DecalController {
         decalService.assignCarToDecal(decalId, carId);
     }
 
-    @PutMapping("events/{eventId}/decals/{decalId}")
-    public void addDecalToEvent(
-            @PathVariable("decalId") Long decalId,
-            @PathVariable("eventId") Long eventId
-    ) {
-        decalService.addDecalToEvent(eventId, decalId);
-    }
-
 }

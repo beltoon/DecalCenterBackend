@@ -13,27 +13,23 @@ public class Event {
     @GeneratedValue
     private Long id;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "decal_id")
-    private Set<Decal> addEventDecals = new HashSet<>();
-
     private String name;
+
+    @ManyToMany
+    @JoinTable(
+            name = "added_decals",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "decal_id")
+    )
+    Set<Decal> addedDecals = new HashSet<>();
     private Boolean privateEvent;
     private LocalDate eventDate;
 
     public Event() {
     }
 
-    public Event(Long id, Set<Decal> decals, String name, Boolean privateEvent, LocalDate eventDate) {
-        this.id = id;
-        this.addEventDecals = addEventDecals;
-        this.name = name;
-        this.privateEvent = privateEvent;
-        this.eventDate = eventDate;
-    }
-
-    public Set<Decal> getAddEventDecals() {
-        return addEventDecals;
+    public Set<Decal> getAddedDecals() {
+        return addedDecals;
     }
 
     public Long getId() {
@@ -66,13 +62,5 @@ public class Event {
 
     public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
-    }
-
-    public void setAddEventDecals(Set<Decal> decals) {
-        this.addEventDecals = addEventDecals;
-    }
-
-    public void eventDecals(Decal decal) {
-        addEventDecals.add(decal);
     }
 }

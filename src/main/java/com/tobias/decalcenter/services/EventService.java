@@ -3,9 +3,11 @@ package com.tobias.decalcenter.services;
 import com.tobias.decalcenter.dtos.EventDto;
 import com.tobias.decalcenter.dtos.EventInputDto;
 import com.tobias.decalcenter.exceptions.RecordNotFoundException;
+import com.tobias.decalcenter.models.Decal;
+import com.tobias.decalcenter.models.Event;
+import com.tobias.decalcenter.repositories.DecalRepository;
 import com.tobias.decalcenter.repositories.EventRepository;
 import org.springframework.stereotype.Service;
-import com.tobias.decalcenter.models.Event;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
@@ -15,12 +17,15 @@ import java.util.List;
 public class EventService {
 
     private final EventRepository eventRepository;
+    private final DecalRepository decalRepository;
+
 
     private final DecalService decalService;
 
     public EventService(EventRepository eventRepository,
-                        DecalService decalService) {
+                        DecalRepository decalRepository, DecalService decalService) {
         this.eventRepository = eventRepository;
+        this.decalRepository = decalRepository;
         this.decalService = decalService;
     }
 
@@ -90,7 +95,7 @@ public class EventService {
         var event = new Event();
 
         event.setName(eventDto.getName());
-        event.setAddEventDecals(eventDto.getAddEventDecals());
+//        event.setDecal(eventDto.getDecal());
         event.setPrivateEvent(eventDto.getPrivateEvent());
         event.setEventDate(eventDto.getEventDate());
 
@@ -101,11 +106,16 @@ public class EventService {
         EventDto eventDto = new EventDto();
         eventDto.setId(event.getId());
         eventDto.setName(event.getName());
-        eventDto.setAddEventDecals(event.getAddEventDecals());
         eventDto.setPrivateEvent(event.getPrivateEvent());
         eventDto.setEventDate(event.getEventDate());
+        eventDto.setDecal(event.getAddedDecals());
         return eventDto;
     }
 
-
+    public Event addDecalToEvent(Long decalId, Long eventId) {
+        Event event = eventRepository.findById(eventId).get();
+        Decal decal = decalRepository.findById(decalId).get();
+        event.getAddedDecals().add(decal);
+        return eventRepository.save(event);
+    }
 }

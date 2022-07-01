@@ -69,4 +69,12 @@ public class EventController {
 
         return ResponseEntity.ok().body(eventDto);
     }
+
+    @PutMapping("events/{eventId}/decals/{decalId}")
+    public void addDecalToEvent(
+            @PathVariable("decalId") Long decalId,
+            @PathVariable("eventId") Long eventId
+    ) {
+        eventService.addDecalToEvent(decalId, eventId);
+    }
 }

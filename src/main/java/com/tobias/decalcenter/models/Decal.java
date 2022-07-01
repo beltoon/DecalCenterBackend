@@ -1,5 +1,7 @@
 package com.tobias.decalcenter.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,41 +16,19 @@ public class Decal {
 
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "event_decals",
-            joinColumns = @JoinColumn(name = "decal_id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id")
-    )
-    private Set<Decal> eventDecals = new HashSet<>();
+    @JsonIgnore
+    @ManyToMany(mappedBy = "addedDecals")
+    private Set<Event> events = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
+
     private String decalPosition;
     private String creator;
     private String company;
     private String series;
 // LOCALDATE toevoegen om te filteren op meest recente??
-
-    public Decal() {
-    }
-
-    public Decal(Long id,
-                 String name,
-                 Car car,
-                 String decalPosition,
-                 String creator,
-                 String company,
-                 String series) {
-        this.id = id;
-        this.name = name;
-        this.car = car;
-        this.decalPosition = decalPosition;
-        this.creator = creator;
-        this.company = company;
-        this.series = series;
-    }
 
     public Long getId() {
         return id;
@@ -58,8 +38,8 @@ public class Decal {
         return name;
     }
 
-    public Set<Decal> getEventDecals() {
-        return eventDecals;
+    public Set<Event> getEvents() {
+        return events;
     }
 
     public Car getCar() {
@@ -90,8 +70,8 @@ public class Decal {
         this.name = name;
     }
 
-    public void setEventDecals(Set<Decal> eventDecals) {
-        this.eventDecals = eventDecals;
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 
     public void setCar(Car car) {
@@ -113,9 +93,4 @@ public class Decal {
     public void setSeries(String event) {
         this.series = event;
     }
-
-
-//    public void eventDecals(Decal decal) {
-//        eventDecals.add(decal);
-//    }
 }

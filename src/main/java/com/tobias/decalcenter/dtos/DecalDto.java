@@ -11,25 +11,6 @@ public class DecalDto {
     private String company;
     private String series;
 
-    public DecalDto() {
-    }
-
-    public DecalDto(Long id,
-                    String name,
-                    Car car,
-                    String decalPosition,
-                    String creator,
-                    String company,
-                    String series) {
-        this.id = id;
-        this.name = name;
-        this.car = car;
-        this.decalPosition = decalPosition;
-        this.creator = creator;
-        this.company = company;
-        this.series = series;
-    }
-
     public Long getId() {
         return id;
     }

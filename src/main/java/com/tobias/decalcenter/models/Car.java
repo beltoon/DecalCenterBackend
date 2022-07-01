@@ -3,6 +3,7 @@ package com.tobias.decalcenter.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,27 +16,12 @@ public class Car {
 
     @JsonIgnore
     @OneToMany(mappedBy = "car")
-    private Set<Decal> decals;
+    private Set<Decal> decals = new HashSet<>();
 
     private String name;
     private String brand;
     private String type;
     private String category;
-
-//    public Car() {
-//    }
-//
-//    public Car(Long id,
-//               String name,
-//               String brand,
-//               String type,
-//               String category) {
-//        this.id = id;
-//        this.name = name;
-//        this.brand = brand;
-//        this.type = type;
-//        this.category = category;
-//    }
 
     public Set<Decal> getDecals() {
         return decals;

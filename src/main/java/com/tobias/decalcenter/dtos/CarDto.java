@@ -10,21 +10,6 @@ public class CarDto {
     private String type;
     private String category;
 
-
-public CarDto() {}
-
-    public CarDto(Long id,
-                  String name,
-                  String brand,
-                  String type,
-                  String category) {
-        this.id = id;
-        this.name = name;
-        this.brand = brand;
-        this.type = type;
-        this.category = category;
-    }
-
     public Long getId() {
         return id;
     }
