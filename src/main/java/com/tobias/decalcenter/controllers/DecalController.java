@@ -93,12 +93,12 @@ public class DecalController {
     }
 
     @PostMapping("/{id}/photo")
-    public void assignPhotoToStudent(@PathVariable("id") Long studentNumber,
-                                     @RequestBody MultipartFile file) {
+    public void assignImageToDecal(@PathVariable("id") Long decalId,
+                                   @RequestBody MultipartFile file) {
 
         FileUploadResponse decalImage = imageController.singleFileUpload(file);
 
-        decalService.assignImageToDecal(decalImage.getFileName(), studentNumber);
+        decalService.assignImageToDecal(decalImage.getFileName(), decalId);
 
     }
 

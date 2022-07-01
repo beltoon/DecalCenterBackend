@@ -43,7 +43,7 @@ public class ImageService {
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
 
-        Path filePath = Paths.get(fileStoragePath + "/" + fileName);
+        Path filePath = Paths.get(fileStoragePath + "\\" + fileName);
 
         try {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);

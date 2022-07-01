@@ -25,7 +25,7 @@ public class ImageController {
     }
 
     //    post for single upload
-    @PostMapping("/upload")
+    @PostMapping("/decals/upload")
     FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file){
 
         // next line makes url. example "http://localhost:8080/download/naam.jpg"
