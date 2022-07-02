@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -25,7 +26,9 @@ public class ImageController {
     }
 
     //    post for single upload
-    @PostMapping("/decals/upload")
+
+    @Transactional
+    @PostMapping("/upload")
     FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file){
 
         // next line makes url. example "http://localhost:8080/download/naam.jpg"
@@ -39,6 +42,7 @@ public class ImageController {
     }
 
     //    get for single download
+    @Transactional
     @GetMapping("/download/{fileName}")
     ResponseEntity<Resource> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
 

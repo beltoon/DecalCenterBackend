@@ -4,6 +4,7 @@ import com.tobias.decalcenter.dtos.DecalDto;
 import com.tobias.decalcenter.dtos.DecalInputDto;
 import com.tobias.decalcenter.models.FileUploadResponse;
 import com.tobias.decalcenter.services.DecalService;
+import com.tobias.decalcenter.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,15 +56,16 @@ public class DecalController {
         return ResponseEntity.ok().body(decal);
     }
 
-    @PostMapping("/decals")
     @Transactional
-    public ResponseEntity<Object> addDecal(
+    @PostMapping("/decals/")
+      public ResponseEntity<Object> addDecal(
             @RequestBody DecalInputDto decalInputDto) {
 
         DecalDto decalDto = decalService.addDecal(decalInputDto);
 
         return ResponseEntity.created(null).body(decalDto);
     }
+
 
     @DeleteMapping("/decals/{id}")
     public ResponseEntity<Object> deleteDecal(
@@ -92,7 +94,8 @@ public class DecalController {
         decalService.assignCarToDecal(decalId, carId);
     }
 
-    @PostMapping("/{id}/photo")
+    @Transactional
+    @PostMapping("/decals/{Id}/")
     public void assignImageToDecal(@PathVariable("id") Long decalId,
                                    @RequestBody MultipartFile file) {
 
