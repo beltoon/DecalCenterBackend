@@ -111,7 +111,6 @@ public class DecalService {
         decal.setCreator(decalDto.getCreator());
         decal.setCompany(decalDto.getCompany());
         decal.setSeries(decalDto.getSeries());
-        decal.setFile(decalDto.getFile());
         return decal;
     }
 
@@ -124,7 +123,6 @@ public class DecalService {
         decalDto.setCreator(decal.getCreator());
         decalDto.setCompany(decal.getCompany());
         decalDto.setSeries(decal.getSeries());
-        decalDto.setFile(decal.getFile());
         return decalDto;
     }
 
@@ -152,11 +150,11 @@ public class DecalService {
 
         if (optionalDecal.isPresent() && fileUploadResponse.isPresent()) {
 
-            FileUploadResponse photo = fileUploadResponse.get();
+            FileUploadResponse image = fileUploadResponse.get();
 
             Decal decal = optionalDecal.get();
 
-            decal.setFile(photo);
+            decal.setFile(image);
 
             decalRepository.save(decal);
 

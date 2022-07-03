@@ -29,10 +29,9 @@ public class Decal {
     private String company;
     private String series;
 
-    @OneToOne(cascade = CascadeType.ALL)
-            @JoinColumn(name = "file")
+    @OneToOne
+    @JoinColumn(name = "file_name")
     FileUploadResponse file;
-// LOCALDATE toevoegen om te filteren op meest recente??
 
     public Long getId() {
         return id;

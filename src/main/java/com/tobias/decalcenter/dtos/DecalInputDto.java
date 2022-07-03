@@ -1,7 +1,6 @@
 package com.tobias.decalcenter.dtos;
 
 import com.tobias.decalcenter.models.Car;
-import com.tobias.decalcenter.models.FileUploadResponse;
 
 public class DecalInputDto {
     private String name;
@@ -10,7 +9,6 @@ public class DecalInputDto {
     private String creator;
     private String company;
     private String series;
-    FileUploadResponse file;
 
     public String getName() {
         return name;
@@ -36,10 +34,6 @@ public class DecalInputDto {
         return series;
     }
 
-    public FileUploadResponse getFile() {
-        return file;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -62,9 +56,5 @@ public class DecalInputDto {
 
     public void setSeries(String series) {
         this.series = series;
-    }
-
-    public void setFile(FileUploadResponse file) {
-        this.file = file;
     }
 }

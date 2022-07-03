@@ -96,7 +96,7 @@ public class DecalController {
 
     @Transactional
     @PostMapping("/decals/{Id}/")
-    public void assignImageToDecal(@PathVariable("id") Long decalId,
+    public void assignImageToDecal(@PathVariable Long decalId,
                                    @RequestBody MultipartFile file) {
 
         FileUploadResponse decalImage = imageController.singleFileUpload(file);
