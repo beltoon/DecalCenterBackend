@@ -12,6 +12,7 @@ import com.tobias.decalcenter.repositories.EventRepository;
 import com.tobias.decalcenter.repositories.FileUploadRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +29,17 @@ public class DecalService {
 
     private final FileUploadRepository fileUploadRepository;
 
+    private final ImageService imageService;
+
     public DecalService(DecalRepository decalRepository,
                         CarRepository carRepository,
                         EventRepository eventRepository,
-                        FileUploadRepository fileUploadRepository) {
+                        FileUploadRepository fileUploadRepository, ImageService imageService) {
         this.decalRepository = decalRepository;
         this.carRepository = carRepository;
         this.eventRepository = eventRepository;
         this.fileUploadRepository = fileUploadRepository;
+        this.imageService = imageService;
     }
 
     public List<DecalDto> getAllDecals() {
@@ -81,6 +85,16 @@ public class DecalService {
 
         return transferToDto(decal);
     }
+
+    public void createDecalWithFile(DecalInputDto decalInputDto, String name) {
+
+        DecalDto decalDto = addDecal(decalInputDto);
+        Long decalId = decalDto.getId();
+        assignImageToDecal(name, decalId);
+
+    }
+
+
 
     public void deleteDecal(@RequestBody Long id) {
         decalRepository.deleteById(id);

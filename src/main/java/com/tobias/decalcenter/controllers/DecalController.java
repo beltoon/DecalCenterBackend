@@ -6,11 +6,13 @@ import com.tobias.decalcenter.models.FileUploadResponse;
 import com.tobias.decalcenter.services.DecalService;
 import com.tobias.decalcenter.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +67,18 @@ public class DecalController {
 
         return ResponseEntity.created(null).body(decalDto);
     }
+
+    @Transactional
+    @PostMapping("/decals/file")
+    public void createDecalWithFile(
+            @RequestBody DecalInputDto decalInputDto,
+            @RequestParam ("file") MultipartFile file) {
+
+        FileUploadResponse fileUpload = imageController.singleFileUpload(file);
+        String name = fileUpload.getFileName();
+        decalService.createDecalWithFile(decalInputDto, name);
+    }
+
 
 
     @DeleteMapping("/decals/{id}")
