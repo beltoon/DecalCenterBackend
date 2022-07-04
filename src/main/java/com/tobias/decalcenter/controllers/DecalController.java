@@ -71,7 +71,7 @@ public class DecalController {
     @Transactional
     @PostMapping("/decals/file")
     public void createDecalWithFile(
-            @RequestBody DecalInputDto decalInputDto,
+            @ModelAttribute DecalInputDto decalInputDto,
             @RequestParam ("file") MultipartFile file) {
 
         FileUploadResponse fileUpload = imageController.singleFileUpload(file);
