@@ -82,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/decals").permitAll()
-                .antMatchers(HttpMethod.GET, "/events").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/events/**").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/users").hasAnyAuthority("ADMIN", "USER")
 //                .antMatchers(HttpMethod.GET, "/users").hasAuthority("ADMIN")
 //                .antMatchers(HttpMethod.PUT, "/users").hasAuthority("ADMIN")
