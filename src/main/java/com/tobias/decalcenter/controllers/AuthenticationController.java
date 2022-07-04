@@ -1,10 +1,12 @@
 package com.tobias.decalcenter.controllers;
 
+import com.tobias.decalcenter.dtos.UserDto;
 import com.tobias.decalcenter.payload.AuthenticationRequest;
 import com.tobias.decalcenter.payload.AuthenticationResponse;
 import com.tobias.decalcenter.services.CustomUserDetailsService;
-import com.tobias.decalcenter.util.JwtUtil;
+import com.tobias.decalcenter.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,12 +28,13 @@ public class AuthenticationController {
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
-    JwtUtil jwtUtil;
+    JwtService jwtService;
 
     @GetMapping(value = "/authenticated")
     public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
         return ResponseEntity.ok().body(principal);
     }
+
 
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
@@ -51,7 +54,7 @@ public class AuthenticationController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(username);
 
-        final String jwt = jwtUtil.generateToken(userDetails);
+        final String jwt = jwtService.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }

@@ -1,7 +1,7 @@
 package com.tobias.decalcenter.filter;
 
 import com.tobias.decalcenter.services.CustomUserDetailsService;
-import com.tobias.decalcenter.util.JwtUtil;
+import com.tobias.decalcenter.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,7 +23,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
-    private JwtUtil jwtUtil;
+    private JwtService jwtService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -35,13 +35,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
-            username = jwtUtil.extractUsername(jwt);
+            username = jwtService.extractUsername(jwt);
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
-            if (jwtUtil.validateToken(jwt, userDetails)) {
+            if (jwtService.validateToken(jwt, userDetails)) {
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities()
@@ -51,7 +51,5 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
         }
         filterChain.doFilter(request, response);
-
     }
-
 }

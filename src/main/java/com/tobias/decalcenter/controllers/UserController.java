@@ -27,7 +27,7 @@ public class UserController {
     private UserService userService;
 
 
-    @GetMapping(value = "/users/")
+    @GetMapping(value = "/users")
     public ResponseEntity<List<UserDto>> getUsers() {
 
         List<UserDto> userDtos = userService.getUsers();
@@ -44,30 +44,18 @@ public class UserController {
         return ResponseEntity.ok().body(optionalUser);
     }
 
-    @PostMapping(value = "/users/")
+    @PostMapping(value = "/users")
     public ResponseEntity<Object> createAccount(
-            @Valid @RequestBody UserDto userDto, BindingResult br) {
+            @Valid @RequestBody UserDto userDto) {
+        String newUsername = userService.createUser(userDto);
+        userService.addAuthority(newUsername, "ROLE_USER");
 
-        if (br.hasErrors()) {
-            StringBuilder sb = new StringBuilder();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
+                .buildAndExpand(newUsername).toUri();
 
-            for (FieldError fe : br.getFieldErrors()) {
-                sb.append(fe.getDefaultMessage());
-                sb.append("\n");
-            }
-            return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
-
-        } else {
-
-            String newUsername = userService.createUser(userDto);
-            userService.addAuthority(newUsername, "ROLE_USER");
-
-            URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/user/{username}")
-                    .buildAndExpand(newUsername).toUri();
-
-            return ResponseEntity.created(location).build();
-        }
+        return ResponseEntity.created(location).build();
     }
+
 
     @PutMapping(value = "/users/{username}")
     public ResponseEntity<UserDto> updateAccount(

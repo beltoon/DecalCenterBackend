@@ -31,8 +31,8 @@ INSERT INTO event_decals (event_id, decal_id) VALUES (1002, 1005);
 INSERT INTO event_decals (event_id, decal_id) VALUES (1002, 1006);
 INSERT INTO event_decals (event_id, decal_id) VALUES (1002, 1008);
 
-INSERT INTO users (username, password, email, enabled) VALUES ('user', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica','user@test.nl', TRUE);
-INSERT INTO users (username, password, email, enabled) VALUES ('admin', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', 'admin@test.nl', TRUE);
+INSERT INTO users (username, apikey, password, email, enabled) VALUES ('user', null, '$2a$12$.c3Zt6DQl9yl4sy5qT7DOe5LcMiq8UiC0ZdiKi.w8WiKtDYHpq7OK','user@test.nl', TRUE);
+INSERT INTO users (username, apikey, password, email, enabled) VALUES ('admin', null, '$2a$12$nosoFLa5zh4UkJ6Z/1rcduFDOnrYsFqPrWbHfcxb1ZXZFr.h9ufVa', 'admin@test.nl', TRUE);
 
 INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');
 INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_USER');
