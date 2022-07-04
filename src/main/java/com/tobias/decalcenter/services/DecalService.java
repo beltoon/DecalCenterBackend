@@ -91,7 +91,6 @@ public class DecalService {
         DecalDto decalDto = addDecal(decalInputDto);
         Long decalId = decalDto.getId();
         assignImageToDecal(name, decalId);
-
     }
 
 
