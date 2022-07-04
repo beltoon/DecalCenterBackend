@@ -2,11 +2,17 @@ package com.tobias.decalcenter.controllers;
 
 import com.tobias.decalcenter.dtos.DecalDto;
 import com.tobias.decalcenter.dtos.DecalInputDto;
+import com.tobias.decalcenter.models.FileUploadResponse;
 import com.tobias.decalcenter.services.DecalService;
+import com.tobias.decalcenter.services.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,13 +20,17 @@ import java.util.Optional;
 public class DecalController {
 
     private final DecalService decalService;
+    private final ImageController imageController;
 
     @Autowired
-    public DecalController(DecalService decalService) {
+    public DecalController(DecalService decalService, ImageController imageController) {
         this.decalService = decalService;
+        this.imageController = imageController;
     }
 
+
     @GetMapping("/decals")
+    @Transactional
     public ResponseEntity<List<DecalDto>> getAllDecals(
             @RequestParam(value = "name", required = false) Optional<String> name) {
 
@@ -39,6 +49,7 @@ public class DecalController {
     }
 
     @GetMapping("/decals/{id}")
+    @Transactional
     public ResponseEntity<Object> getDecal(
             @PathVariable("id") Long id) {
 
@@ -47,14 +58,28 @@ public class DecalController {
         return ResponseEntity.ok().body(decal);
     }
 
-    @PostMapping("/decals")
-    public ResponseEntity<Object> addDecal(
+    @Transactional
+    @PostMapping("/decals/")
+      public ResponseEntity<Object> addDecal(
             @RequestBody DecalInputDto decalInputDto) {
 
         DecalDto decalDto = decalService.addDecal(decalInputDto);
 
         return ResponseEntity.created(null).body(decalDto);
     }
+
+    @Transactional
+    @PostMapping("/decals/file")
+    public void createDecalWithFile(
+            @ModelAttribute DecalInputDto decalInputDto,
+            @RequestParam ("file") MultipartFile file) {
+
+        FileUploadResponse fileUpload = imageController.singleFileUpload(file);
+        String name = fileUpload.getFileName();
+        decalService.createDecalWithFile(decalInputDto, name);
+    }
+
+
 
     @DeleteMapping("/decals/{id}")
     public ResponseEntity<Object> deleteDecal(
@@ -81,6 +106,17 @@ public class DecalController {
             @PathVariable("carId") Long carId
     ) {
         decalService.assignCarToDecal(decalId, carId);
+    }
+
+    @Transactional
+    @PostMapping("/decals/{Id}/")
+    public void assignImageToDecal(@PathVariable Long decalId,
+                                   @RequestBody MultipartFile file) {
+
+        FileUploadResponse decalImage = imageController.singleFileUpload(file);
+
+        decalService.assignImageToDecal(decalImage.getFileName(), decalId);
+
     }
 
 }

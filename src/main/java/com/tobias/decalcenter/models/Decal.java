@@ -28,7 +28,10 @@ public class Decal {
     private String creator;
     private String company;
     private String series;
-// LOCALDATE toevoegen om te filteren op meest recente??
+
+    @OneToOne
+    @JoinColumn(name = "file_name")
+    FileUploadResponse file;
 
     public Long getId() {
         return id;
@@ -62,6 +65,10 @@ public class Decal {
         return series;
     }
 
+    public FileUploadResponse getFile() {
+        return file;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -92,5 +99,9 @@ public class Decal {
 
     public void setSeries(String event) {
         this.series = event;
+    }
+
+    public void setFile(FileUploadResponse file) {
+        this.file = file;
     }
 }
