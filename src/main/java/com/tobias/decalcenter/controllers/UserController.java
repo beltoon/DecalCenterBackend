@@ -35,9 +35,9 @@ public class UserController {
         return ResponseEntity.ok().body(userDtos);
     }
 
-    @GetMapping(value = "/users/{username}/")
+    @GetMapping(value = "/users/{id}/")
     public ResponseEntity<UserDto> getUser(
-            @PathVariable("username") String username) {
+            @PathVariable("id") String username) {
 
         UserDto optionalUser = userService.getUser(username);
 

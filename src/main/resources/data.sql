@@ -31,9 +31,9 @@ INSERT INTO event_decals (event_id, decal_id) VALUES (1002, 1005);
 INSERT INTO event_decals (event_id, decal_id) VALUES (1002, 1006);
 INSERT INTO event_decals (event_id, decal_id) VALUES (1002, 1008);
 
-INSERT INTO users (username, apikey, password, email, enabled) VALUES ('user', null, '$2a$12$.c3Zt6DQl9yl4sy5qT7DOe5LcMiq8UiC0ZdiKi.w8WiKtDYHpq7OK','user@test.nl', TRUE);
-INSERT INTO users (username, apikey, password, email, enabled) VALUES ('admin', null, '$2a$12$nosoFLa5zh4UkJ6Z/1rcduFDOnrYsFqPrWbHfcxb1ZXZFr.h9ufVa', 'admin@test.nl', TRUE);
+INSERT INTO users (username, apikey, password, email, enabled) VALUES ('max', null, '$2a$12$p.51Ae98h.c7L3WtyjycOOZkzS5uEibkKxOeGsaUepNw8Rn7pCN5C','max@user.nl', true);
+INSERT INTO users (username, apikey, password, email, enabled) VALUES ('jos', null, '$2a$12$p.51Ae98h.c7L3WtyjycOOZkzS5uEibkKxOeGsaUepNw8Rn7pCN5C', 'jos@admin.nl', true);
 
-INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');
-INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_USER');
-INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_ADMIN');
+INSERT INTO authorities (username, authority) VALUES ('max', 'ROLE_USER');
+INSERT INTO authorities (username, authority) VALUES ('jos', 'ROLE_USER');
+INSERT INTO authorities (username, authority) VALUES ('jos', 'ROLE_ADMIN');

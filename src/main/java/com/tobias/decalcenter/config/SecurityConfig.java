@@ -40,14 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .jdbcAuthentication()
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled from users where username=?")
-                .authoritiesByUsernameQuery("select username, authority from authorities where username=?");
-//                .usersByUsernameQuery("SELECT username, password, enabled "
-//                + "FROM users "
-//                + "WHERE username=?")
-//                .authoritiesByUsernameQuery("SELECT username, authority "
-//                + "FROM authorities "
-//                + "WHERE username=?");
+//                .usersByUsernameQuery("select username, password, enabled from users where username=?")
+//                .authoritiesByUsernameQuery("select username, authority from authorities where username=?");
+                .usersByUsernameQuery("SELECT username, password, enabled "
+                        + "FROM users "
+                        + "WHERE username=?")
+                .authoritiesByUsernameQuery("SELECT username, authority "
+                        + "FROM authorities "
+                        + "WHERE username=?");
 
 //        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
     }
@@ -77,13 +77,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
 //                .httpBasic()
 //                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/decals").permitAll()
+                .antMatchers(HttpMethod.GET, "/users/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/events/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.GET, "/users").hasAnyAuthority("ADMIN", "USER")
+//                .antMatchers(HttpMethod.GET, "/users").hasAnyAuthority("ADMIN", "USER")
 //                .antMatchers(HttpMethod.GET, "/users").hasAuthority("ADMIN")
 //                .antMatchers(HttpMethod.PUT, "/users").hasAuthority("ADMIN")
 //                .antMatchers(HttpMethod.POST,"/users/*").hasAuthority("ADMIN")
@@ -91,15 +90,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.DELETE, "/cars/**").hasAuthority("ADMIN")
 //                .antMatchers(HttpMethod.DELETE, "/events/**").hasAuthority("ADMIN")
                 .antMatchers("/authenticated").authenticated()
-                .antMatchers(HttpMethod.POST,"/authenticate").permitAll()
-//                .anyRequest().permitAll()
-                .and();
+                .antMatchers(HttpMethod.POST, "/authenticate").permitAll()
+                .anyRequest().permitAll()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
-
 
 
 }

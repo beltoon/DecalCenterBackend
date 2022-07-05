@@ -43,7 +43,7 @@ public class AuthenticationController {
         String password = authenticationRequest.getPassword();
 
         try {
-            authenticationManager.authenticate(
+                authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
         }
