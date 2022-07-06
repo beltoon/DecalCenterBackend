@@ -43,11 +43,10 @@ public class AuthenticationController {
         String password = authenticationRequest.getPassword();
 
         try {
-                authenticationManager.authenticate(
+            authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
-        }
-        catch (BadCredentialsException ex) {
+        } catch (BadCredentialsException ex) {
             throw new Exception("Incorrect username or password", ex);
         }
 
@@ -59,3 +58,17 @@ public class AuthenticationController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }
+
+//    @PostMapping("/signin")
+//    public ResponseEntity<Object> signIn(@RequestBody UserDto authDto) {
+//        UsernamePasswordAuthenticationToken up =
+//                new UsernamePasswordAuthenticationToken(authDto.getUsername(), authDto.getPassword());
+//        Authentication auth = authenticationManager.authenticate(up);
+//
+//        UserDetails ud = (UserDetails) auth.getPrincipal();
+//        String token = jwtService.generateToken(ud);
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+//                .body(token);
+//    }
+//}

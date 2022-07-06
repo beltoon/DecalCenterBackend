@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -26,6 +27,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @GetMapping(value = "/users")
     public ResponseEntity<List<UserDto>> getUsers() {
@@ -35,9 +38,9 @@ public class UserController {
         return ResponseEntity.ok().body(userDtos);
     }
 
-    @GetMapping(value = "/users/{id}/")
+    @GetMapping(value = "/users/{username}")
     public ResponseEntity<UserDto> getUser(
-            @PathVariable("id") String username) {
+            @PathVariable("username") String username) {
 
         UserDto optionalUser = userService.getUser(username);
 
@@ -48,6 +51,10 @@ public class UserController {
     public ResponseEntity<Object> createAccount(
             @Valid @RequestBody UserDto userDto) {
         String newUsername = userService.createUser(userDto);
+
+
+//        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+
         userService.addAuthority(newUsername, "ROLE_USER");
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")

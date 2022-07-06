@@ -1,13 +1,17 @@
 package com.tobias.decalcenter.services;
 
 import com.tobias.decalcenter.dtos.UserDto;
+
 import com.tobias.decalcenter.exceptions.RecordNotFoundException;
+
+import com.tobias.decalcenter.exceptions.UserNameExistsException;
 import com.tobias.decalcenter.models.Authority;
 import com.tobias.decalcenter.models.User;
 import com.tobias.decalcenter.repositories.UserRepository;
 import com.tobias.decalcenter.util.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +24,13 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+//    public UserService(PasswordEncoder passwordEncoder) {
+//        this.passwordEncoder = passwordEncoder;
+//    }
 
     public List<UserDto> getUsers() {
         List<UserDto> collection = new ArrayList<>();
@@ -48,6 +59,11 @@ public class UserService {
     }
 
     public String createUser(UserDto userDto) {
+        if (userExists(userDto.username)) throw new UserNameExistsException(userDto.getUsername());
+
+        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+        userDto.setPassword(encodedPassword);
+
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         userDto.setApikey(randomString);
         User newUser = userRepository.save(toUser(userDto));
@@ -118,7 +134,7 @@ public class UserService {
         var user = new User();
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
-//        user.setEnabled(userDto.getEnabled());
+        user.setEnabled(userDto.getEnabled());
         user.setApikey(userDto.getApikey());
         user.setEmail(userDto.getEmail());
 
