@@ -2,11 +2,11 @@ package com.tobias.decalcenter.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
 public class FileUploadResponse {
+
 
     @Id
     private String fileName;
@@ -15,10 +15,9 @@ public class FileUploadResponse {
 
     private String url;
 
-//    @OneToOne
-//    @JoinColumn(name = "decal_id", referencedColumnName = "id")
+//    @OneToOne(mappedBy = "fileName")
 //    private Decal decal;
-//
+
 //    public Decal getDecal() {
 //        return decal;
 //    }
@@ -48,7 +47,6 @@ public class FileUploadResponse {
     public String getUrl() {
         return url;
     }
-
 
     public void setFileName(String fileName) {
         this.fileName = fileName;

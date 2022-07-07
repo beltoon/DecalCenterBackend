@@ -1,11 +1,20 @@
 package com.tobias.decalcenter.dtos;
 
+import com.tobias.decalcenter.models.Decal;
+
+import java.util.Set;
+
 public class CarInputDto {
 
     private String name;
     private String brand;
     private String type;
     private String category;
+    private Set<Decal> decals;
+
+    public Set<Decal> getDecals() {
+        return decals;
+    }
 
     public String getName() {
         return name;
@@ -21,6 +30,10 @@ public class CarInputDto {
 
     public String getCategory() {
         return category;
+    }
+
+    public void setDecals(Set<Decal> decals) {
+        this.decals = decals;
     }
 
     public void setName(String name) {

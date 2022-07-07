@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface DecalRepository extends JpaRepository<Decal, Long> {
     List<Decal> findAllDecalsByNameEqualsIgnoreCase(String name);
+
+    List<Decal> findAllDecalsByCarId(Long id);
 }

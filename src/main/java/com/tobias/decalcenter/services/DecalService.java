@@ -10,13 +10,14 @@ import com.tobias.decalcenter.repositories.CarRepository;
 import com.tobias.decalcenter.repositories.DecalRepository;
 import com.tobias.decalcenter.repositories.EventRepository;
 import com.tobias.decalcenter.repositories.FileUploadRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DecalService {
@@ -31,16 +32,26 @@ public class DecalService {
 
     private final ImageService imageService;
 
+
+    @Autowired
     public DecalService(DecalRepository decalRepository,
                         CarRepository carRepository,
                         EventRepository eventRepository,
-                        FileUploadRepository fileUploadRepository, ImageService imageService) {
+                        FileUploadRepository fileUploadRepository,
+                        ImageService imageService) {
         this.decalRepository = decalRepository;
         this.carRepository = carRepository;
         this.eventRepository = eventRepository;
         this.fileUploadRepository = fileUploadRepository;
         this.imageService = imageService;
     }
+
+//    public List<DecalDto> getAllDecals() {
+//
+//        List<Decal> decalList = decalRepository.findAll();
+//
+//        return transferDecalListToDtoList(decalList);
+//    }
 
     public List<DecalDto> getAllDecals() {
 
@@ -55,6 +66,20 @@ public class DecalService {
 
         return transferDecalListToDtoList(decalList);
     }
+
+    public List<DecalDto> getAllDecalsByCarId(Long carId) {
+        List<Decal> decalList = decalRepository.findAll();
+
+        List<Decal> filteredDecals = decalList.stream()
+                .filter(decal -> decal.getCar()
+                        .getId().compareTo(carId) == 0)
+                .collect(Collectors.toList());
+
+        return transferDecalListToDtoList(filteredDecals);
+    }
+
+
+    ////////
 
     public List<DecalDto> transferDecalListToDtoList(List<Decal> decals) {
 
@@ -86,14 +111,13 @@ public class DecalService {
         return transferToDto(decal);
     }
 
+
     public void createDecalWithFile(DecalInputDto decalInputDto, String name) {
 
         DecalDto decalDto = addDecal(decalInputDto);
         Long decalId = decalDto.getId();
         assignImageToDecal(name, decalId);
     }
-
-
 
     public void deleteDecal(@RequestBody Long id) {
         decalRepository.deleteById(id);
@@ -124,6 +148,7 @@ public class DecalService {
         decal.setCreator(decalDto.getCreator());
         decal.setCompany(decalDto.getCompany());
         decal.setSeries(decalDto.getSeries());
+        decal.setFileName(decalDto.getFileName());
         return decal;
     }
 
@@ -136,6 +161,7 @@ public class DecalService {
         decalDto.setCreator(decal.getCreator());
         decalDto.setCompany(decal.getCompany());
         decalDto.setSeries(decal.getSeries());
+        decalDto.setFileName(decal.getFileName());
         return decalDto;
     }
 
@@ -167,7 +193,7 @@ public class DecalService {
 
             Decal decal = optionalDecal.get();
 
-            decal.setFile(image);
+            decal.setFileName(image);
 
             decalRepository.save(decal);
 

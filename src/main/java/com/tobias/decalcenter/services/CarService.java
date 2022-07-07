@@ -4,12 +4,15 @@ import com.tobias.decalcenter.dtos.CarDto;
 import com.tobias.decalcenter.dtos.CarInputDto;
 import com.tobias.decalcenter.exceptions.RecordNotFoundException;
 import com.tobias.decalcenter.models.Car;
+import com.tobias.decalcenter.models.Decal;
 import com.tobias.decalcenter.repositories.CarRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarService {
@@ -33,6 +36,14 @@ public class CarService {
 
         return transferCarListToDtoList(carList);
     }
+
+//    public List<CarDto> getAllDecalsByCar(String name) {
+//        List<Car> carList = carRepository.findAllCarsByNameEqualsIgnoreCase(name);
+//
+//
+//        return transferCarListToDtoList(carList);
+//    }
+
 
     public List<CarDto> transferCarListToDtoList(List<Car> cars) {
         List<CarDto> carDtoList = new ArrayList<>();
@@ -90,6 +101,7 @@ public class CarService {
         car.setBrand(carDto.getBrand());
         car.setType(carDto.getType());
         car.setCategory(carDto.getCategory());
+//        car.setDecals(carDto.getDecals());
         return car;
     }
 
@@ -100,6 +112,7 @@ public class CarService {
         carDto.setBrand(car.getBrand());
         carDto.setType(car.getType());
         carDto.setCategory(car.getCategory());
+        carDto.setDecals(car.getDecals());
         return carDto;
     }
 }

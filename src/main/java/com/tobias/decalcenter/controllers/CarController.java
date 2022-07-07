@@ -2,14 +2,17 @@ package com.tobias.decalcenter.controllers;
 
 import com.tobias.decalcenter.dtos.CarDto;
 import com.tobias.decalcenter.dtos.CarInputDto;
+import com.tobias.decalcenter.models.Car;
 import com.tobias.decalcenter.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 public class CarController {
 
@@ -22,7 +25,7 @@ public class CarController {
 
     @GetMapping("/cars")
     public ResponseEntity<List<CarDto>> getAllCars(
-            @RequestParam(value = "name", required = false) Optional<String> name) {
+            @RequestParam(value = "carName", required = false) Optional<String> name) {
 
         List<CarDto> carDtos;
 
@@ -38,6 +41,20 @@ public class CarController {
 
         return ResponseEntity.ok().body(carDtos);
     }
+
+//    @Transactional
+//    @GetMapping("cars/{id}/decals")
+//    public ResponseEntity<List<CarDto>> getAllDecalsByCar(
+//
+//            @RequestParam(value = "carName", required = false) Optional<String> name) {
+//        List<CarDto> carDtos;
+//
+//        carDtos = carService.getAllCarsByName(name.get());
+//
+//        return ResponseEntity.ok().body(carDtos);
+//    }
+
+
 
     @GetMapping("/cars/{id}")
     public ResponseEntity<CarDto> getCar(

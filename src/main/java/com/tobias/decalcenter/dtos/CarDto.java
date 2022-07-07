@@ -1,7 +1,10 @@
 package com.tobias.decalcenter.dtos;
 
+import com.tobias.decalcenter.models.Decal;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import java.util.Set;
 
 public class CarDto {
     private Long id;
@@ -9,6 +12,11 @@ public class CarDto {
     private String brand;
     private String type;
     private String category;
+    private Set<Decal> decals;
+
+    public Set<Decal> getDecals() {
+        return decals;
+    }
 
     public Long getId() {
         return id;
@@ -28,6 +36,10 @@ public class CarDto {
 
     public String getCategory() {
         return category;
+    }
+
+    public void setDecals(Set<Decal> decals) {
+        this.decals = decals;
     }
 
     public void setId(Long id) {

@@ -47,6 +47,10 @@ public class Car {
         return category;
     }
 
+    public void setDecals(Set<Decal> decals) {
+        this.decals = decals;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

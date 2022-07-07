@@ -12,13 +12,13 @@ INSERT INTO cars (id, name, brand, type, category) VALUES (1010, 'Dallara P217',
 
 INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1001, 'TREQ 488 branding', 'top', 1001, 'TREQ Simracing Equipment', 'TREQ', 'IMSA');
 INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1002, 'Heusinkveld Audi R8 branding', 'sides', 1002, 'Heusinkveld Engineering', 'Heusinkveld Engineering', 'VRS');
-INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1003, 'iOverlay branding', 'front', 1003, 'Joepie', 'iOverlay inc.', 'World Series');
+INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1003, 'iOverlay branding', 'front', 1001, 'Joepie', 'iOverlay inc.', 'World Series');
 INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1004, 'Forzilla 2022', 'total', 1004, 'Pablo', 'Fordzilla', 'VRS');
 INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1005, 'BS+ Competition', 'wing', 1005, 'Ryan', 'Buro Süd', 'Sim Cup');
 INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1006, 'IRNL GT3 league', 'decal', 1006, 'Jan', 'iRacing Nederland', 'IRNL GT3 League');
 INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1007, 'Squadra Corse', 'sides', 1007, 'Ferruccio', 'Lamborghini', 'Super Trofeo');
 INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1008, 'Mercedes-AMG GT3', 'total', 1008, 'Günther', 'Mercedes', 'IMSA');
-INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1009, 'Johnny Rabit Racing', 'sides', 1009, 'Brad Pitlimiter', 'NASCAR', 'XFINITY');
+INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1009, 'Johnny Rabit Racing', 'sides', 1001, 'Brad Pitlimiter', 'NASCAR', 'XFINITY');
 
 INSERT INTO events (id, name, private_event, event_date) VALUES (1001, 'Daytona 24hr', false, '25-12-2022');
 INSERT INTO events (id, name, private_event, event_date) VALUES (1002, 'Watkins 6hr', false, '24-12-2022');

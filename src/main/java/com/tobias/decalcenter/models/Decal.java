@@ -29,9 +29,10 @@ public class Decal {
     private String company;
     private String series;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "file_name")
-    FileUploadResponse file;
+    private FileUploadResponse fileName;
 
     public Long getId() {
         return id;
@@ -65,8 +66,8 @@ public class Decal {
         return series;
     }
 
-    public FileUploadResponse getFile() {
-        return file;
+    public FileUploadResponse getFileName() {
+        return fileName;
     }
 
     public void setId(Long id) {
@@ -101,7 +102,7 @@ public class Decal {
         this.series = event;
     }
 
-    public void setFile(FileUploadResponse file) {
-        this.file = file;
+    public void setFileName(FileUploadResponse file) {
+        this.fileName = file;
     }
 }
