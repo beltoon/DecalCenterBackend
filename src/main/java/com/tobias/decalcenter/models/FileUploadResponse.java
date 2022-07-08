@@ -15,8 +15,8 @@ public class FileUploadResponse {
 
     private String url;
 
-//    @OneToOne(mappedBy = "fileName")
-//    private Decal decal;
+    @OneToOne(mappedBy = "fileName")
+    private Decal decal;
 
 //    public Decal getDecal() {
 //        return decal;
@@ -48,6 +48,10 @@ public class FileUploadResponse {
         return url;
     }
 
+    public Decal getDecal() {
+        return decal;
+    }
+
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
@@ -60,4 +64,7 @@ public class FileUploadResponse {
         this.url = url;
     }
 
+    public void setDecal(Decal decal) {
+        this.decal = decal;
+    }
 }

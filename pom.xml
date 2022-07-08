@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.tobias</groupId>
     <artifactId>decalcenter</artifactId>
-    <version>0.0.1-Dev</version>
+    <version>1.0.0</version>
     <name>decalcenter</name>
     <description>decalcenter</description>
     <properties>
