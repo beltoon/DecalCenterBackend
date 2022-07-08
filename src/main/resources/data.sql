@@ -1,13 +1,13 @@
-INSERT INTO cars (id, name, brand, type, category) VALUES (1001, 'Ferrari 488 GT3 Evo 2020', 'Ferrari', 'road', 'gt3');
-INSERT INTO cars (id, name, brand, type, category) VALUES (1002, 'Audi R8 LMS', 'Audi', 'road', 'gt3');
-INSERT INTO cars (id, name, brand, type, category) VALUES (1003, 'McLaren MP4-12C GT3', 'McLaren', 'road', 'gt3');
-INSERT INTO cars (id, name, brand, type, category) VALUES (1004, 'Ford GT GT3', 'Ford', 'road', 'gt3');
-INSERT INTO cars (id, name, brand, type, category) VALUES (1005, 'BMW M4 GT3', 'BMW', 'road', 'gt3');
-INSERT INTO cars (id, name, brand, type, category) VALUES (1006, 'Porsche 911 GT3 R', 'Porsche', 'road', 'gt3');
-INSERT INTO cars (id, name, brand, type, category) VALUES (1007, 'Lamborghini Huracan GT3 EVO', 'Lamborghini', 'road', 'gt3');
-INSERT INTO cars (id, name, brand, type, category) VALUES (1008, 'Mercedes-AMG GT3 2020', 'Mercedes', 'road', 'gt3');
-INSERT INTO cars (id, name, brand, type, category) VALUES (1009, 'NASCAR XFINITY Chevrolet Camaro', 'Chevrolet', 'oval', 'xfinity');
-INSERT INTO cars (id, name, brand, type, category) VALUES (1010, 'Dallara P217', 'Dallara', 'road', 'lmp2');
+INSERT INTO cars (id, name, brand, type, category) VALUES (1001, 'Ferrari 488 GT3 Evo 2020', 'Ferrari', 'road', 'GT3');
+INSERT INTO cars (id, name, brand, type, category) VALUES (1002, 'Audi R8 LMS', 'Audi', 'road', 'GT3');
+INSERT INTO cars (id, name, brand, type, category) VALUES (1003, 'McLaren MP4-12C GT3', 'McLaren', 'road', 'GT3');
+INSERT INTO cars (id, name, brand, type, category) VALUES (1004, 'Ford GT GT3', 'Ford', 'road', 'GT3');
+INSERT INTO cars (id, name, brand, type, category) VALUES (1005, 'BMW M4 GT3', 'BMW', 'road', 'GT3');
+INSERT INTO cars (id, name, brand, type, category) VALUES (1006, 'Porsche 911 GT3 R', 'Porsche', 'road', 'GT3');
+INSERT INTO cars (id, name, brand, type, category) VALUES (1007, 'Lamborghini Huracan GT3 EVO', 'Lamborghini', 'road', 'GT3');
+INSERT INTO cars (id, name, brand, type, category) VALUES (1008, 'Mercedes-AMG GT3 2020', 'Mercedes', 'road', 'GT3');
+INSERT INTO cars (id, name, brand, type, category) VALUES (1009, 'NASCAR XFINITY Chevrolet Camaro', 'Chevrolet', 'oval', 'xFinity');
+INSERT INTO cars (id, name, brand, type, category) VALUES (1010, 'Dallara P217', 'Dallara', 'road', 'LMP2');
 
 
 INSERT INTO decals (id, name, decal_position, car_id, creator, company, series) VALUES (1001, 'TREQ 488 branding', 'top', 1001, 'TREQ Simracing Equipment', 'TREQ', 'IMSA');
@@ -35,5 +35,5 @@ INSERT INTO users (username, apikey, password, email, enabled) VALUES ('max', nu
 INSERT INTO users (username, apikey, password, email, enabled) VALUES ('jos', null, '$2a$12$p.51Ae98h.c7L3WtyjycOOZkzS5uEibkKxOeGsaUepNw8Rn7pCN5C', 'jos@admin.nl', true);
 
 INSERT INTO authorities (username, authority) VALUES ('max', 'ROLE_USER');
-INSERT INTO authorities (username, authority) VALUES ('jos', 'ROLE_USER');
 INSERT INTO authorities (username, authority) VALUES ('jos', 'ROLE_ADMIN');
+INSERT INTO authorities (username, authority) VALUES ('jos', 'ROLE_USER');
