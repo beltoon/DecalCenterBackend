@@ -26,7 +26,6 @@ public class DecalController {
         this.imageController = imageController;
     }
 
-
     @GetMapping("/decals")
     @Transactional
     public ResponseEntity<List<DecalDto>> getAllDecals(
@@ -115,6 +114,7 @@ public class DecalController {
         return ResponseEntity.ok().body(decalDto);
     }
 
+    @Transactional
     @PutMapping("decals/{decalId}/cars/{carId}")
     public void assignCarToDecal(
             @PathVariable("decalId") Long decalId,

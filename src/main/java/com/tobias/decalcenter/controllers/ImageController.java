@@ -29,8 +29,6 @@ public class ImageController {
         this.decalService = decalService;
     }
 
-    //    post for single upload
-
     @Transactional
     @PostMapping("/upload")
     FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file){
@@ -44,16 +42,12 @@ public class ImageController {
         return new FileUploadResponse(fileName, contentType, url);
     }
 
-    //    get for single download
     @Transactional
     @GetMapping("/download/{fileName}")
     ResponseEntity<Resource> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
 
         Resource resource = imageService.downLoadFile(fileName);
 
-//        this mediaType decides witch type you accept if you only accept 1 type
-//        MediaType contentType = MediaType.IMAGE_JPEG;
-//        this is going to accept multiple types
         String mimeType;
 
         try{
@@ -62,10 +56,6 @@ public class ImageController {
             mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
         }
 
-//        for download attachment use next line
-//        return ResponseEntity.ok().contentType(contentType).header(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + resource.getFilename()).body(resource);
-//        for showing image in browser
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + resource.getFilename()).body(resource);
     }
-
 }
