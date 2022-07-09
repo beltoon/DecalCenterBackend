@@ -21,7 +21,8 @@ public class EventController {
     }
 
     @GetMapping("/events")
-    public ResponseEntity<List<EventDto>> getAllEvents(@RequestParam(value = "eventName", required = false) Optional<String> eventName) {
+    public ResponseEntity<List<EventDto>> getAllEvents(
+            @RequestParam(value = "eventName", required = false) Optional<String> eventName) {
 
         List<EventDto> eventDtos;
 
@@ -39,13 +40,17 @@ public class EventController {
     }
 
     @GetMapping("/events/{id}")
-    public ResponseEntity<EventDto> getEvents(@PathVariable("id") Long eventId) {
+    public ResponseEntity<EventDto> getEvents(
+            @PathVariable("id") Long eventId) {
+
         EventDto event = eventService.getEventById(eventId);
+
         return ResponseEntity.ok().body(event);
     }
 
     @PostMapping("/events")
-    public ResponseEntity<Object> addEvent(@RequestBody EventInputDto eventInputDto) {
+    public ResponseEntity<Object> addEvent(
+            @RequestBody EventInputDto eventInputDto) {
 
         EventDto eventDto = eventService.addEvent(eventInputDto);
 
@@ -53,7 +58,8 @@ public class EventController {
     }
 
     @DeleteMapping("/events/{eventId}")
-    public ResponseEntity<Object> deleteEvent(@PathVariable Long eventId) {
+    public ResponseEntity<Object> deleteEvent(
+            @PathVariable Long eventId) {
 
         eventService.deleteEvent(eventId);
 

@@ -25,7 +25,6 @@ public class Decal {
     private Car car;
 
     private String decalPosition;
-    private String creator;
     private String company;
     private String series;
 
@@ -52,10 +51,6 @@ public class Decal {
 
     public String getDecalPosition() {
         return decalPosition;
-    }
-
-    public String getCreator() {
-        return creator;
     }
 
     public String getCompany() {
@@ -88,10 +83,6 @@ public class Decal {
 
     public void setDecalPosition(String decalPosition) {
         this.decalPosition = decalPosition;
-    }
-
-    public void setCreator(String owner) {
-        this.creator = owner;
     }
 
     public void setCompany(String company) {

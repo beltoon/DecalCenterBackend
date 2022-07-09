@@ -26,9 +26,6 @@ public class Event {
     private Boolean privateEvent;
     private LocalDate eventDate;
 
-    public Event() {
-    }
-
     public Set<Decal> getEventDecals() {
         return eventDecals;
     }

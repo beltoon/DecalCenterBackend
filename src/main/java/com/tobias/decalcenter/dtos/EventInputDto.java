@@ -5,7 +5,6 @@ import com.tobias.decalcenter.models.Decal;
 import java.time.LocalDate;
 import java.util.Set;
 
-
 public class EventInputDto {
     private String name;
     private Boolean privateEvent;

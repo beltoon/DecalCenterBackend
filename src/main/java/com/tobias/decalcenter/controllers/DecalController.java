@@ -21,7 +21,8 @@ public class DecalController {
     private final ImageController imageController;
 
     @Autowired
-    public DecalController(DecalService decalService, ImageController imageController) {
+    public DecalController(DecalService decalService,
+                           ImageController imageController) {
         this.decalService = decalService;
         this.imageController = imageController;
     }
@@ -48,17 +49,14 @@ public class DecalController {
     @Transactional
     @GetMapping("cars/{carId}/decals")
     public ResponseEntity<List<DecalDto>> getAllDecalsByCarId(
-//            @RequestParam(value = "id") Long id) {
-           @PathVariable("carId") Long carId) {
+            @PathVariable("carId") Long carId) {
 
         List<DecalDto> decalDtos;
 
-
-            decalDtos = decalService.getAllDecalsByCarId(carId);
+        decalDtos = decalService.getAllDecalsByCarId(carId);
 
         return ResponseEntity.ok().body(decalDtos);
     }
-
 
     @GetMapping("/decals/{id}")
     @Transactional
@@ -70,11 +68,9 @@ public class DecalController {
         return ResponseEntity.ok().body(decal);
     }
 
-
-
     @Transactional
     @PostMapping("/decals")
-      public ResponseEntity<Object> addDecal(
+    public ResponseEntity<Object> addDecal(
             @RequestBody DecalInputDto decalInputDto) {
 
         DecalDto decalDto = decalService.addDecal(decalInputDto);
@@ -86,14 +82,13 @@ public class DecalController {
     @PostMapping("/decals/file")
     public void createDecalWithFile(
             @ModelAttribute DecalInputDto decalInputDto,
-            @RequestParam ("file") MultipartFile file) {
+            @RequestParam("file") MultipartFile file) {
 
         FileUploadResponse fileUpload = imageController.singleFileUpload(file);
         String name = fileUpload.getFileName();
+
         decalService.createDecalWithFile(decalInputDto, name);
     }
-
-
 
     @DeleteMapping("/decals/{id}")
     public ResponseEntity<Object> deleteDecal(

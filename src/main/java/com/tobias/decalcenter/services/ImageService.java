@@ -25,16 +25,21 @@ public class ImageService {
 
     private final FileUploadRepository fileUploadRepository;
 
-    public ImageService(@Value("C:/Users/tobia/OneDrive/Full Stack Developer/Java/decalcenter/uploads") String fileStorageLocation, FileUploadRepository fileUploadRepository) {
+    public ImageService(@Value("C:/Users/tobia/OneDrive/Full Stack Developer/Java/decalcenter/uploads")
+                                String fileStorageLocation, FileUploadRepository fileUploadRepository) {
         fileStoragePath = Paths.get(fileStorageLocation).toAbsolutePath().normalize();
 
         this.fileStorageLocation = fileStorageLocation;
         this.fileUploadRepository = fileUploadRepository;
 
         try {
+
             Files.createDirectories(fileStoragePath);
+
         } catch (IOException e) {
+
             throw new RuntimeException("Issue in creating file directory");
+
         }
 
     }
@@ -46,9 +51,13 @@ public class ImageService {
         Path filePath = Paths.get(fileStoragePath + "\\" + fileName);
 
         try {
+
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
         } catch (IOException e) {
+
             throw new RuntimeException("Issue in storing the file", e);
+
         }
 
         fileUploadRepository.save(new FileUploadResponse(fileName, file.getContentType(), url));
@@ -63,16 +72,23 @@ public class ImageService {
         Resource resource;
 
         try {
+
             resource = new UrlResource(path.toUri());
+
         } catch (MalformedURLException e) {
+
             throw new RuntimeException("Issue in reading the file", e);
+
         }
 
         if(resource.exists()&& resource.isReadable()) {
+
             return resource;
+
         } else {
+
             throw new RuntimeException("the file doesn't exist or not readable");
+
         }
     }
-
 }

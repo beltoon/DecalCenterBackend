@@ -1,12 +1,10 @@
 package com.tobias.decalcenter.controllers;
 
-import com.tobias.decalcenter.dtos.UserDto;
 import com.tobias.decalcenter.payload.AuthenticationRequest;
 import com.tobias.decalcenter.payload.AuthenticationResponse;
 import com.tobias.decalcenter.services.CustomUserDetailsService;
 import com.tobias.decalcenter.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -31,13 +29,14 @@ public class AuthenticationController {
     JwtService jwtService;
 
     @GetMapping(value = "/authenticated")
-    public ResponseEntity<Object> authenticated(Authentication authentication, Principal principal) {
+    public ResponseEntity<Object> authenticated(Authentication authentication,
+                                                Principal principal) {
         return ResponseEntity.ok().body(principal);
     }
 
-
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(
+            @RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
@@ -58,17 +57,3 @@ public class AuthenticationController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }
-
-//    @PostMapping("/signin")
-//    public ResponseEntity<Object> signIn(@RequestBody UserDto authDto) {
-//        UsernamePasswordAuthenticationToken up =
-//                new UsernamePasswordAuthenticationToken(authDto.getUsername(), authDto.getPassword());
-//        Authentication auth = authenticationManager.authenticate(up);
-//
-//        UserDetails ud = (UserDetails) auth.getPrincipal();
-//        String token = jwtService.generateToken(ud);
-//        return ResponseEntity.ok()
-//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-//                .body(token);
-//    }
-//}

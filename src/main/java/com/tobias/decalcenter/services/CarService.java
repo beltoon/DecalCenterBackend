@@ -4,15 +4,12 @@ import com.tobias.decalcenter.dtos.CarDto;
 import com.tobias.decalcenter.dtos.CarInputDto;
 import com.tobias.decalcenter.exceptions.RecordNotFoundException;
 import com.tobias.decalcenter.models.Car;
-import com.tobias.decalcenter.models.Decal;
 import com.tobias.decalcenter.repositories.CarRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CarService {
@@ -37,15 +34,8 @@ public class CarService {
         return transferCarListToDtoList(carList);
     }
 
-//    public List<CarDto> getAllDecalsByCar(String name) {
-//        List<Car> carList = carRepository.findAllCarsByNameEqualsIgnoreCase(name);
-//
-//
-//        return transferCarListToDtoList(carList);
-//    }
-
-
     public List<CarDto> transferCarListToDtoList(List<Car> cars) {
+
         List<CarDto> carDtoList = new ArrayList<>();
 
         for (Car car : cars) {
@@ -67,14 +57,15 @@ public class CarService {
     }
 
     public CarDto addCar(CarInputDto carInputDto) {
-        Car car = transferToCar(carInputDto);
 
+        Car car = transferToCar(carInputDto);
         carRepository.save(car);
 
         return transferToDto(car);
     }
 
     public void deleteCar(@RequestBody Long id) {
+
         carRepository.deleteById(id);
     }
 
@@ -85,7 +76,6 @@ public class CarService {
 
             Car car1 = transferToCar(carInputDto);
             car1.setId(car.getId());
-
             carRepository.save(car1);
 
             return transferToDto(car1);
@@ -95,17 +85,18 @@ public class CarService {
     }
 
     public Car transferToCar(CarInputDto carDto) {
-        var car = new Car();
 
+        var car = new Car();
         car.setName(carDto.getName());
         car.setBrand(carDto.getBrand());
         car.setType(carDto.getType());
         car.setCategory(carDto.getCategory());
-//        car.setDecals(carDto.getDecals());
+
         return car;
     }
 
     public CarDto transferToDto(Car car) {
+
         CarDto carDto = new CarDto();
         carDto.setId(car.getId());
         carDto.setName(car.getName());
@@ -113,6 +104,7 @@ public class CarService {
         carDto.setType(car.getType());
         carDto.setCategory(car.getCategory());
         carDto.setDecals(car.getDecals());
+
         return carDto;
     }
 }

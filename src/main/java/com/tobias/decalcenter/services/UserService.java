@@ -28,21 +28,21 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-//    public UserService(PasswordEncoder passwordEncoder) {
-//        this.passwordEncoder = passwordEncoder;
-//    }
-
     public List<UserDto> getUsers() {
+
         List<UserDto> collection = new ArrayList<>();
         List<User> list = userRepository.findAll();
 
         for (User user : list) {
+
             collection.add(fromUser(user));
+
         }
         return collection;
     }
 
     public UserDto getUser(String username) {
+
         UserDto dto = new UserDto();
         Optional<User> user = userRepository.findById(username);
 
@@ -78,6 +78,7 @@ public class UserService {
     public void updateUser(String username, UserDto newUser) {
 
         if (!userRepository.existsById(username)) throw new RecordNotFoundException();
+
         User user = userRepository.findById(username).get();
         user.setPassword(newUser.getPassword());
 
@@ -87,6 +88,7 @@ public class UserService {
     public Set<Authority> getAuthorities(String username) {
 
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
+
         User user = userRepository.findById(username).get();
         UserDto userDto = fromUser(user);
 
@@ -96,6 +98,7 @@ public class UserService {
     public void addAuthority(String username, String authority) {
 
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
+
         User user = userRepository.findById(username).get();
         user.addAuthority(new Authority(username, authority));
 
@@ -105,6 +108,7 @@ public class UserService {
     public void removeAuthority(String username, String authority) {
 
         if (!userRepository.existsById(username)) throw new UsernameNotFoundException(username);
+
         User user = userRepository.findById(username).get();
         Authority authorityToRemove = user
                 .getAuthorities()
@@ -118,7 +122,6 @@ public class UserService {
     public static UserDto fromUser(User user) {
 
         var dto = new UserDto();
-
         dto.username = user.getUsername();
         dto.password = user.getPassword();
         dto.enabled = user.isEnabled();
@@ -140,5 +143,4 @@ public class UserService {
 
         return user;
     }
-
 }

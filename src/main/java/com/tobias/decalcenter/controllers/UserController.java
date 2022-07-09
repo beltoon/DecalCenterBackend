@@ -4,13 +4,7 @@ import com.tobias.decalcenter.dtos.UserDto;
 import com.tobias.decalcenter.exceptions.BadRequestException;
 import com.tobias.decalcenter.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,8 +21,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
 
     @GetMapping(value = "/users")
     public ResponseEntity<List<UserDto>> getUsers() {
@@ -50,15 +42,14 @@ public class UserController {
     @PostMapping(value = "/users")
     public ResponseEntity<Object> createAccount(
             @Valid @RequestBody UserDto userDto) {
+
         String newUsername = userService.createUser(userDto);
-
-
-//        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
-
         userService.addAuthority(newUsername, "ROLE_USER");
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
-                .buildAndExpand(newUsername).toUri();
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{username}")
+                .buildAndExpand(newUsername)
+                .toUri();
 
         return ResponseEntity.created(location).build();
     }
@@ -66,7 +57,8 @@ public class UserController {
 
     @PutMapping(value = "/users/{username}")
     public ResponseEntity<UserDto> updateAccount(
-            @PathVariable("username") String username, @RequestBody UserDto userDto) {
+            @PathVariable("username") String username,
+            @RequestBody UserDto userDto) {
 
         userService.updateUser(username, userDto);
 
@@ -93,7 +85,9 @@ public class UserController {
     public ResponseEntity<Object> addUserAuthority(
             @PathVariable("username") String username,
             @RequestBody Map<String, Object> fields) {
+
         try {
+
             String authorityName = (String) fields.get("authority");
             userService.addAuthority(username, authorityName);
 
@@ -109,10 +103,9 @@ public class UserController {
     public ResponseEntity<Object> deleteUserAuthority(
             @PathVariable("username") String username,
             @PathVariable("authority") String authority) {
+
         userService.removeAuthority(username, authority);
 
         return ResponseEntity.noContent().build();
     }
 }
-
-

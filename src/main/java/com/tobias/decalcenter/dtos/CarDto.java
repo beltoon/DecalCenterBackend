@@ -2,8 +2,6 @@ package com.tobias.decalcenter.dtos;
 
 import com.tobias.decalcenter.models.Decal;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.util.Set;
 
 public class CarDto {

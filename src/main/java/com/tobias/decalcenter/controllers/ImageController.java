@@ -1,6 +1,5 @@
 package com.tobias.decalcenter.controllers;
 
-import com.tobias.decalcenter.models.Decal;
 import com.tobias.decalcenter.models.FileUploadResponse;
 import com.tobias.decalcenter.services.DecalService;
 import com.tobias.decalcenter.services.ImageService;
@@ -21,22 +20,22 @@ import java.util.Objects;
 @CrossOrigin
 public class ImageController {
     private final ImageService imageService;
-    private final DecalService decalService;
 
-
-    public ImageController(ImageService imageServiceservice, DecalService decalService) {
-        this.imageService = imageServiceservice;
-        this.decalService = decalService;
+    public ImageController(ImageService imageService) {
+        this.imageService = imageService;
     }
 
     @Transactional
     @PostMapping("/upload")
-    FileUploadResponse singleFileUpload(@RequestParam("file") MultipartFile file){
+    FileUploadResponse singleFileUpload(
+            @RequestParam("file") MultipartFile file) {
 
-        String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/download/").path(Objects.requireNonNull(file.getOriginalFilename())).toUriString();
+        String url = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(Objects.requireNonNull(file.getOriginalFilename()))
+                .toUriString();
 
         String contentType = file.getContentType();
-
         String fileName = imageService.storeFile(file, url);
 
         return new FileUploadResponse(fileName, contentType, url);
@@ -44,18 +43,24 @@ public class ImageController {
 
     @Transactional
     @GetMapping("/download/{fileName}")
-    ResponseEntity<Resource> downLoadSingleFile(@PathVariable String fileName, HttpServletRequest request) {
+    ResponseEntity<Resource> downLoadSingleFile(
+            @PathVariable String fileName, HttpServletRequest request) {
 
         Resource resource = imageService.downLoadFile(fileName);
-
         String mimeType;
 
-        try{
+        try {
+
             mimeType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+
         } catch (IOException e) {
+
             mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
+
         }
 
-        return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType)).header(HttpHeaders.CONTENT_DISPOSITION, "inline;fileName=" + resource.getFilename()).body(resource);
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(mimeType))
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "inline;fileName=" + resource.getFilename()).body(resource);
     }
 }

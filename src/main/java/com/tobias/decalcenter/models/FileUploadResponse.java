@@ -7,27 +7,18 @@ import javax.persistence.OneToOne;
 @Entity
 public class FileUploadResponse {
 
-
     @Id
     private String fileName;
 
     private String contentType;
-
     private String url;
 
     @OneToOne(mappedBy = "fileName")
     private Decal decal;
 
-//    public Decal getDecal() {
-//        return decal;
-//    }
-//
-//    public void setDecal(Decal decal) {
-//        this.decal = decal;
-//    }
-
-
-    public FileUploadResponse(String fileName, String contentType, String url) {
+    public FileUploadResponse(String fileName,
+                              String contentType,
+                              String url) {
         this.fileName = fileName;
         this.contentType = contentType;
         this.url = url;

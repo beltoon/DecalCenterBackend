@@ -4,7 +4,6 @@ import com.tobias.decalcenter.filter.JwtRequestFilter;
 
 import com.tobias.decalcenter.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -14,12 +13,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
+
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
@@ -27,7 +23,6 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
 
     @Autowired
     DataSource dataSource;
@@ -44,18 +39,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .jdbcAuthentication()
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .dataSource(dataSource)
-//                .usersByUsernameQuery("select username, password, enabled from users where username=?")
-//                .authoritiesByUsernameQuery("select username, authority from authorities where username=?");
                 .usersByUsernameQuery("SELECT username, password, enabled "
                         + "FROM users "
                         + "WHERE username=?")
                 .authoritiesByUsernameQuery("SELECT username, authority "
                         + "FROM authorities "
                         + "WHERE username=?");
-//        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
     }
-
-
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -67,15 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .inMemoryAuthentication()
-//                .withUser("admin").password("{noop}admin").roles("ADMIN");
-//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -89,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/users/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/users/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/events/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "cars/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/cars/**").permitAll()
 //                .antMatchers(HttpMethod.GET, "/users").hasAnyAuthority("ADMIN", "USER")
 //                .antMatchers(HttpMethod.GET, "/users").hasAuthority("ADMIN")
 //                .antMatchers(HttpMethod.PUT, "/users").hasAuthority("ADMIN")
@@ -103,10 +84,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
     }
-
-
 }

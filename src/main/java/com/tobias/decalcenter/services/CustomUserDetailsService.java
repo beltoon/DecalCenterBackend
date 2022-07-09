@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,34 +19,21 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
-//    private PasswordEncoder passwordEncoder;
-//
-//    public CustomUserDetailsService (PasswordEncoder passwordEncoder) {
-//        this.passwordEncoder = passwordEncoder;
-//    }
-
-//    @Autowired
-//    private AuthorityService authorityService;
-
     @Override
     public UserDetails loadUserByUsername(String username) {
-        UserDto userDto = userService.getUser(username);
 
-                String password = userDto.getPassword();
-//        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+        UserDto userDto = userService.getUser(username);
+        String password = userDto.getPassword();
 
         Set<Authority> authorities = userDto.getAuthorities();
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+
         for (Authority authority : authorities) {
+
             grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
+
         }
 
         return new org.springframework.security.core.userdetails.User(username, password, grantedAuthorities);
-//        return new org.springframework.security.core.userdetails.User(username, encodedPassword, grantedAuthorities);
     }
-
 }
-
-
-
-

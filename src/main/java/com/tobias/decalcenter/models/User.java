@@ -87,5 +87,4 @@ public class User {
     public void removeAuthority(Authority authority) {
         this.authorities.remove(authority);
     }
-
 }

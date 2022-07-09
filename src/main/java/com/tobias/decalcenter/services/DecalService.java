@@ -8,7 +8,7 @@ import com.tobias.decalcenter.models.Decal;
 import com.tobias.decalcenter.models.FileUploadResponse;
 import com.tobias.decalcenter.repositories.CarRepository;
 import com.tobias.decalcenter.repositories.DecalRepository;
-import com.tobias.decalcenter.repositories.EventRepository;
+
 import com.tobias.decalcenter.repositories.FileUploadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,35 +23,17 @@ import java.util.stream.Collectors;
 public class DecalService {
 
     private final DecalRepository decalRepository;
-
     private final CarRepository carRepository;
-
-    private final EventRepository eventRepository;
-
     private final FileUploadRepository fileUploadRepository;
-
-    private final ImageService imageService;
-
 
     @Autowired
     public DecalService(DecalRepository decalRepository,
                         CarRepository carRepository,
-                        EventRepository eventRepository,
-                        FileUploadRepository fileUploadRepository,
-                        ImageService imageService) {
+                        FileUploadRepository fileUploadRepository) {
         this.decalRepository = decalRepository;
         this.carRepository = carRepository;
-        this.eventRepository = eventRepository;
         this.fileUploadRepository = fileUploadRepository;
-        this.imageService = imageService;
     }
-
-//    public List<DecalDto> getAllDecals() {
-//
-//        List<Decal> decalList = decalRepository.findAll();
-//
-//        return transferDecalListToDtoList(decalList);
-//    }
 
     public List<DecalDto> getAllDecals() {
 
@@ -68,6 +50,7 @@ public class DecalService {
     }
 
     public List<DecalDto> getAllDecalsByCarId(Long carId) {
+
         List<Decal> decalList = decalRepository.findAll();
 
         List<Decal> filteredDecals = decalList.stream()
@@ -77,9 +60,6 @@ public class DecalService {
 
         return transferDecalListToDtoList(filteredDecals);
     }
-
-
-    ////////
 
     public List<DecalDto> transferDecalListToDtoList(List<Decal> decals) {
 
@@ -104,13 +84,13 @@ public class DecalService {
     }
 
     public DecalDto addDecal(DecalInputDto decalInputDto) {
+
         Decal decal = transferToDecal(decalInputDto);
 
         decalRepository.save(decal);
 
         return transferToDto(decal);
     }
-
 
     public void createDecalWithFile(DecalInputDto decalInputDto, String name) {
 
@@ -140,32 +120,34 @@ public class DecalService {
     }
 
     public Decal transferToDecal(DecalInputDto decalDto) {
-        var decal = new Decal();
 
+        var decal = new Decal();
         decal.setName(decalDto.getName());
         decal.setCar(decalDto.getCar());
         decal.setDecalPosition(decalDto.getDecalPosition());
-        decal.setCreator(decalDto.getCreator());
         decal.setCompany(decalDto.getCompany());
         decal.setSeries(decalDto.getSeries());
         decal.setFileName(decalDto.getFileName());
+
         return decal;
     }
 
     public DecalDto transferToDto(Decal decal) {
+
         DecalDto decalDto = new DecalDto();
         decalDto.setId(decal.getId());
         decalDto.setName(decal.getName());
         decalDto.setCar(decal.getCar());
         decalDto.setDecalPosition(decal.getDecalPosition());
-        decalDto.setCreator(decal.getCreator());
         decalDto.setCompany(decal.getCompany());
         decalDto.setSeries(decal.getSeries());
         decalDto.setFileName(decal.getFileName());
+
         return decalDto;
     }
 
     public void assignCarToDecal(Long decalId, Long carId) {
+
         var optionalDecal = decalRepository.findById(decalId);
         var optionalCar = carRepository.findById(carId);
 
@@ -184,21 +166,15 @@ public class DecalService {
     public void assignImageToDecal(String name, Long decalId) {
 
         Optional<Decal> optionalDecal = decalRepository.findById(decalId);
-
         Optional<FileUploadResponse> fileUploadResponse = fileUploadRepository.findByFileName(name);
 
         if (optionalDecal.isPresent() && fileUploadResponse.isPresent()) {
 
             FileUploadResponse image = fileUploadResponse.get();
-
             Decal decal = optionalDecal.get();
-
             decal.setFileName(image);
 
             decalRepository.save(decal);
-
         }
-
     }
-
 }

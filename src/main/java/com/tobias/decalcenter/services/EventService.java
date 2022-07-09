@@ -19,14 +19,10 @@ public class EventService {
     private final EventRepository eventRepository;
     private final DecalRepository decalRepository;
 
-
-    private final DecalService decalService;
-
     public EventService(EventRepository eventRepository,
-                        DecalRepository decalRepository, DecalService decalService) {
+                        DecalRepository decalRepository) {
         this.eventRepository = eventRepository;
         this.decalRepository = decalRepository;
-        this.decalService = decalService;
     }
 
     public List<EventDto> getAllEvents() {
@@ -44,11 +40,14 @@ public class EventService {
     }
 
     public List<EventDto> transferEventListToDtoList(List<Event> events) {
+
         List<EventDto> eventDtoList = new ArrayList<>();
 
         for (Event event : events) {
+
             EventDto eventDto = transferToDto(event);
             eventDtoList.add(eventDto);
+
         }
         return eventDtoList;
     }
@@ -56,15 +55,20 @@ public class EventService {
     public EventDto getEventById(Long id) {
 
         if (eventRepository.findById(id).isPresent()) {
+
             Event event = eventRepository.findById(id).get();
 
             return transferToDto(event);
+
         } else {
+
             throw new RecordNotFoundException("No event found...");
+
         }
     }
 
     public EventDto addEvent(EventInputDto eventInputDto) {
+
         Event event = transferToEvent(eventInputDto);
 
         eventRepository.save(event);
@@ -77,7 +81,9 @@ public class EventService {
     }
 
     public EventDto updateEvent(Long id, EventInputDto eventInputDto) {
+
         if (eventRepository.findById(id).isPresent()) {
+
             Event event = eventRepository.findById(id).get();
 
             Event event1 = transferToEvent(eventInputDto);
@@ -92,10 +98,10 @@ public class EventService {
     }
 
     public Event transferToEvent(EventInputDto eventDto) {
+
         var event = new Event();
 
         event.setName(eventDto.getName());
-//        event.setDecal(eventDto.getDecal());
         event.setPrivateEvent(eventDto.getPrivateEvent());
         event.setEventDate(eventDto.getEventDate());
 
@@ -103,6 +109,7 @@ public class EventService {
     }
 
     public EventDto transferToDto(Event event) {
+
         EventDto eventDto = new EventDto();
         eventDto.setId(event.getId());
         eventDto.setName(event.getName());
@@ -113,6 +120,7 @@ public class EventService {
     }
 
     public Event addDecalToEvent(Long decalId, Long eventId) {
+
         Event event = eventRepository.findById(eventId).get();
         Decal decal = decalRepository.findById(decalId).get();
         event.getEventDecals().add(decal);

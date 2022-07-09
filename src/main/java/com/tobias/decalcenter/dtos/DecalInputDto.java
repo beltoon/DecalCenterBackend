@@ -7,7 +7,6 @@ public class DecalInputDto {
     private String name;
     private Car car;
     private String decalPosition;
-    private String creator;
     private String company;
     private String series;
     private FileUploadResponse fileName;
@@ -26,10 +25,6 @@ public class DecalInputDto {
 
     public String getDecalPosition() {
         return decalPosition;
-    }
-
-    public String getCreator() {
-        return creator;
     }
 
     public String getCompany() {
@@ -54,10 +49,6 @@ public class DecalInputDto {
 
     public void setDecalPosition(String decalPosition) {
         this.decalPosition = decalPosition;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
     }
 
     public void setCompany(String company) {

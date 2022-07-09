@@ -6,14 +6,11 @@ import com.tobias.decalcenter.models.Authority;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class UserDto {
 
-    @Size(min=2, max=48, message = "username must be between 2 and 48")
     public String username;
-
 
     public String password;
     public Boolean enabled;
@@ -23,10 +20,6 @@ public class UserDto {
     public String email;
     @JsonSerialize
     public Set<Authority> authorities;
-
-//    public Long getId() {
-//        return id;
-//    }
 
     public String getUsername() {
         return username;
@@ -47,10 +40,6 @@ public class UserDto {
     public String getEmail() {
         return email;
     }
-
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     public Set<Authority> getAuthorities() {
         return authorities;
