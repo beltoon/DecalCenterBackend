@@ -1,5 +1,6 @@
 package com.tobias.decalcenter.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -13,7 +14,7 @@ public class FileUploadResponse {
     private String contentType;
     private String url;
 
-    @OneToOne(mappedBy = "fileName")
+    @OneToOne(mappedBy = "fileName", cascade = CascadeType.ALL, orphanRemoval = true)
     private Decal decal;
 
     public FileUploadResponse(String fileName,
