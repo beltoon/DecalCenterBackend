@@ -63,27 +63,59 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //JWT token authentication
         http
-//                .httpBasic()
-//                .and()
-                .csrf().disable()
+                .httpBasic()
+                .and()
+
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/users/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/users/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/events/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/cars/**").permitAll()
-//                .antMatchers(HttpMethod.GET, "/users").hasAnyAuthority("ADMIN", "USER")
-//                .antMatchers(HttpMethod.GET, "/users").hasAuthority("ADMIN")
-//                .antMatchers(HttpMethod.PUT, "/users").hasAuthority("ADMIN")
-//                .antMatchers(HttpMethod.POST,"/users/*").hasAuthority("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/users/**").hasAuthority("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/cars/**").hasAuthority("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/events/**").hasAuthority("ADMIN")
+                .antMatchers( "/authenticate/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/decals").permitAll()
+                .antMatchers(HttpMethod.GET, "/users/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST,"/users/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT).hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/upload").hasAnyRole()
+                .antMatchers(HttpMethod.POST, "/decals/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST).hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.PUT).hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET).permitAll()
                 .antMatchers("/authenticated").authenticated()
-                .antMatchers(HttpMethod.POST, "/authenticate").permitAll()
                 .anyRequest().permitAll()
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .csrf().disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//
+//        //JWT token authentication
+//        http
+////                .httpBasic()
+////                .and()
+//                .csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers(HttpMethod.GET, "/users/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/users/**").permitAll()
+//                .antMatchers(HttpMethod.GET, "/events/**").permitAll()
+//                .antMatchers(HttpMethod.DELETE, "/cars/**").permitAll()
+////                .antMatchers(HttpMethod.GET, "/users").hasAnyAuthority("ADMIN", "USER")
+////                .antMatchers(HttpMethod.GET, "/users").hasAuthority("ADMIN")
+////                .antMatchers(HttpMethod.PUT, "/users").hasAuthority("ADMIN")
+////                .antMatchers(HttpMethod.POST,"/users/*").hasAuthority("ADMIN")
+////                .antMatchers(HttpMethod.DELETE, "/users/**").hasAuthority("ADMIN")
+////                .antMatchers(HttpMethod.DELETE, "/cars/**").hasAuthority("ADMIN")
+////                .antMatchers(HttpMethod.DELETE, "/events/**").hasAuthority("ADMIN")
+//                .antMatchers("/authenticated").authenticated()
+//                .antMatchers(HttpMethod.POST, "/authenticate").permitAll()
+//                .anyRequest().permitAll()
+//                .and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//
+//        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+//    }
+//}
