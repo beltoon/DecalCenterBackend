@@ -1,7 +1,6 @@
 package com.tobias.decalcenter.controllers;
 
 import com.tobias.decalcenter.models.FileUploadResponse;
-import com.tobias.decalcenter.services.DecalService;
 import com.tobias.decalcenter.services.ImageService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

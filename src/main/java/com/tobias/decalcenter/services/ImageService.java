@@ -52,7 +52,12 @@ public class ImageService {
 
         try {
 
-            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+            if (file.getOriginalFilename().endsWith(".png")) {
+                Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+                fileUploadRepository.save(new FileUploadResponse(fileName, file.getContentType(), url));
+
+            }
 
         } catch (IOException e) {
 
@@ -60,9 +65,8 @@ public class ImageService {
 
         }
 
-        fileUploadRepository.save(new FileUploadResponse(fileName, file.getContentType(), url));
-
         return fileName;
+
     }
 
     public Resource downLoadFile(String fileName) {
@@ -81,7 +85,7 @@ public class ImageService {
 
         }
 
-        if(resource.exists()&& resource.isReadable()) {
+        if (resource.exists() && resource.isReadable()) {
 
             return resource;
 

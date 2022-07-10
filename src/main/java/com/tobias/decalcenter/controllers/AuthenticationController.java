@@ -3,7 +3,7 @@ package com.tobias.decalcenter.controllers;
 import com.tobias.decalcenter.payload.AuthenticationRequest;
 import com.tobias.decalcenter.payload.AuthenticationResponse;
 import com.tobias.decalcenter.services.CustomUserDetailsService;
-import com.tobias.decalcenter.services.JwtService;
+import com.tobias.decalcenter.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,7 +26,7 @@ public class AuthenticationController {
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
-    JwtService jwtService;
+    JwtUtil jwtUtil;
 
     @GetMapping(value = "/authenticated")
     public ResponseEntity<Object> authenticated(Authentication authentication,
@@ -52,7 +52,7 @@ public class AuthenticationController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(username);
 
-        final String jwt = jwtService.generateToken(userDetails);
+        final String jwt = jwtUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }

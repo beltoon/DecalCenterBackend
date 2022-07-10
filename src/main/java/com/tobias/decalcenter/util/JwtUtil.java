@@ -1,4 +1,4 @@
-package com.tobias.decalcenter.services;
+package com.tobias.decalcenter.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtService {
+public class JwtUtil {
 
     private final static String SECRET_KEY = "secret";
 

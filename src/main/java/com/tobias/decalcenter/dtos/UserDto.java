@@ -2,8 +2,6 @@ package com.tobias.decalcenter.dtos;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.tobias.decalcenter.models.Authority;
-
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
